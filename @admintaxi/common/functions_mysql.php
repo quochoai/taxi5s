@@ -50,13 +50,12 @@ class mysql
 	}
 
 	function query($sql) {
-		$query = @mysqli_query($sql);
+		$query = mysqli_query($this->link, $sql);
 		if (!$query) {
 			$this->error_msg = $this->printError($this->getError(), $sql);
 			return $this->error_msg;
-		} else {
+		} else
 			return $query;
-		}
 	}
 	
 	function affected_rows() {
@@ -132,28 +131,28 @@ class mysql
 	}
 
 	function insert($data = array(), $table) {
-		$key = "";
-		$value = "";
+		$key = "(";
+		$value = "(";
 		foreach ($data as $k => $v) {
 			$key .= "," . $k;
 			$value .= ",'" . str_replace("'", "\'", trim($v))  . "'";
 		}
-		if ($key{
-			0} == ",") $key{
-			0} = "(";
 		$key .= ")";
-		if ($value{
-			0} == ",") $value{
-			0} = "(";
 		$value .= ")";
+		if (substr($key, 0, 2) == "(,") 
+			$key = str_replace("(,", "(", $key);
+
+		if (substr($value, 0, 2) == "(,") 
+			$value = str_replace("(,", "(", $value);
+		
 		$sql = "insert into " . $table . $key . " values " . $value;
 		$query = $this->query($sql);
 		return $query;
 	}
 	// insertData
 	function insertData($data = array(), $table) {
-		$key = "";
-		$value = "";
+		$key = "(";
+		$value = "(";
 		$created_at = $updated_at = date("Y-m-d H:i:s");
 		foreach ($data as $k => $v) {
 			$key .= "," . $k;
@@ -163,21 +162,20 @@ class mysql
 		$value .= ",'" . $created_at . "'";
 		$key .= ",updated_at";
 		$value .= ",'" . $updated_at . "'";
-		if ($key{
-			0} == ",") $key{
-			0} = "(";
+		
+		if (substr($key, 0, 2) == "(,") 
+			$key = str_replace("(,", "(", $key);
 		$key .= ")";
-		if ($value{
-			0} == ",") $value{
-			0} = "(";
+		if (substr($value, 0, 2) == "(,") 
+			$value = str_replace("(,", "(", $value);
 		$value .= ")";
 		$sql = "insert into " . $table . $key . " values " . $value;
 		$query = $this->query($sql);
 		return $query;
 	}
 	function insertDataBy($data = array(), $table, $user_id) {
-		$key = "";
-		$value = "";
+		$key = "(";
+		$value = "(";
 		$created_at = $updated_at = date("Y-m-d H:i:s");
 		foreach ($data as $k => $v) {
 			$key .= "," . $k;
@@ -191,13 +189,11 @@ class mysql
 		$value .= ",'" . $created_at . "'";
 		$key .= ",updated_at";
 		$value .= ",'" . $updated_at . "'";
-		if ($key{
-			0} == ",") $key{
-			0} = "(";
+		if (substr($key, 0, 2) == "(,") 
+			$key = str_replace("(,", "(", $key);
 		$key .= ")";
-		if ($value{
-			0} == ",") $value{
-			0} = "(";
+		if (substr($value, 0, 2) == "(,") 
+			$value = str_replace("(,", "(", $value);
 		$value .= ")";
 		$sql = "insert into " . $table . $key . " values " . $value;
 		$query = $this->query($sql);
@@ -205,54 +201,50 @@ class mysql
 	}
 	// update
 	function update($data = array(), $table, $where = "") {
-		$values = "";
+		$values = "(";
 		foreach ($data as $k => $v) {
 			$values .= ", " . $k . " = '" . str_replace("'", "\'", trim($v))  . "' ";
 		}
-		if ($values{
-			0} == ",") $values{
-			0} = " ";
+		if (substr($values, 0, 2) == "(,") 
+			$values = str_replace("(,", "", $values);
 		$sql = "update " . $table . " set " . $values . $where;
 		$query = $this->query($sql);
 		return $query;
 	}
 
 	function updateData($data = array(), $table, $where = "") {
-		$values = "";
+		$values = "(";
 		foreach ($data as $k => $v) {
 			$values .= ", " . $k . " = '" . str_replace("'", "\'", trim($v))  . "' ";
 		}
 		$values .= ", updated_at = '" . date("Y-m-d H:i:s") . "' ";
-		if ($values{
-			0} == ",") $values{
-			0} = " ";
+		if (substr($values, 0, 2) == "(,") 
+			$values = str_replace("(,", "", $values);
 		$sql = "update " . $table . " set " . $values . $where;
 		$query = $this->query($sql);
 		return $query;
 	}
 	function updateDataBy($data = array(), $table, $where = "", $user_id) {
-		$values = "";
+		$values = "(";
 		foreach ($data as $k => $v) {
 			$values .= ", " . $k . " = '" . str_replace("'", "\'", trim($v))  . "' ";
 		}
 		$values .= ", updated_by = '" . $user_id . "' ";
 		$values .= ", updated_at = '" . date("Y-m-d H:i:s") . "' ";
-		if ($values{
-			0} == ",") $values{
-			0} = " ";
+		if (substr($values, 0, 2) == "(,") 
+			$values = str_replace("(,", "", $values);
 		$sql = "update " . $table . " set " . $values . $where;
 		$query = $this->query($sql);
 		return $query;
 	}
   function updateDataByNotUpdateDate($data = array(), $table, $where = "", $user_id) {
-		$values = "";
+		$values = "(";
 		foreach ($data as $k => $v) {
 			$values .= ", " . $k . " = '" . str_replace("'", "\'", trim($v))  . "' ";
 		}
 		$values .= ", updated_by = '" . $user_id . "' ";
-		if ($values{
-			0} == ",") $values{
-			0} = " ";
+		if (substr($values, 0, 2) == "(,") 
+			$values = str_replace("(,", "", $values);
 		$sql = "update " . $table . " set " . $values . $where;
 		$query = $this->query($sql);
 		return $query;
@@ -279,38 +271,47 @@ class mysql
 		$query = $this->query($sql);
 		return $query;
 	}
-	
+	function randomNumberUse($num_char) {
+		$random = '';
+		$c = '0,1,2,3,4,5,6,7,8,9';
+		$char = explode(",",$c);
+		
+		$char_no = 0;
+		for($x=1; $x <= $num_char; $x++) {
+			$random_index = rand(0,9);
+			$random .= $char[$random_index];
+		}
+		return $random;
+	}
+	function randomString($n) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';  
+    for ($i = 0; $i < $n; $i++) {
+			$index = rand(0, strlen($characters) - 1);
+			$randomString .= $characters[$index];
+    }
+    return $randomString;
+	}
 
-	function encodePQH($p) {
-		$mk = "#*@" . $p . "#@*";
-		$pass = md5($mk);
-		$p1 = substr($pass, 2, 17);
-		$pass1 = md5($p1);
-		$p2 = substr($pass1, 4, 13);
-		$pass2 = md5($p2);
-		$p3 = substr($pass2, 8, 19) . "!@#$";
-		$pass3 = md5($p3);
-		$p4 = substr($pass3, 5, 16);
-		$pass4 = md5($p4);
-		$password = $pass4 . ":" . substr($pass3, 3, 20) . "#$*@!";
+	function encodePQH($p, $hashkey) {
+		$mk = "#*@".$hashkey.$p.$hashkey."#@*".$hashkey;
+		$pass = md5($mk).$hashkey;
+		$p1 = $hashkey.substr($pass, 2, 17)."7011410411";
+		$pass1 = "7011410411".md5($p1).$hashkey.'#$%$#';
+		$p2 = $hashkey.substr($pass1, 4, 13)."7011410411";
+		$pass2 = "7011410411".md5($p2).$hashkey.'%$#@';
+		$p3 = $hashkey.'$%#$'.substr($pass2, 8, 19) . "!@#$7011410411";
+		$pass3 = md5("7011410411".md5($p3)."#@$%!".$hashkey);
+		$p4 = "#@$1286$#@".$hashkey.substr($pass3, 5, 16)."7011410411";
+		$pass4 = md5("7011410411".md5($p4).$hashkey."%$@#$");
+		$password = $pass4 . ":" . substr($pass3, 3, 20) . "@$#@!%*$";
 		return $password;
 	}
-    function randomNumberUse($num_char) {
-    	$random = '';
-    	$c = '0,1,2,3,4,5,6,7,8,9';
-    	$char = explode(",",$c);
-    	
-    	$char_no = 0;
-    	for($x=1; $x <= $num_char; $x++) {
-    		$random_index = rand(0,9);
-    		$random .= $char[$random_index];
-    	}
-    	return $random;
-    }
+	
     
-	function loginUser($user, $p, $remember, $table = 'taxi_admins', $column_user = 'username', $column_password = 'password') {
-	    
-		$password = encodePQH($p);
+	function loginUser($user, $p, $remember, $table = 'admins', $column_user = 'username', $column_password = 'password') {
+	  $hashkey = "tonyDan";
+		$password = $this->encodePQH($p, $hashkey);
 		$su = $this->query("select * from $table where $column_user = '$user' and active = 1 and deleted_at is null");
 		$nu = $this->num_rows($su);
 		if ($nu) {
@@ -346,8 +347,7 @@ class mysql
 		}
 		return $data;
 	}
-	function getAllSelect($select = "*", $table, $where = "deleted_at is null", $orderby = "id desc", $limit = "", $group_having = "")
-	{
+	function getAllSelect($select = "*", $table, $where = "deleted_at is null", $orderby = "id desc", $limit = "", $group_having = "") {
 		$data = array();
 		$s = $this->query("select $select from $table where $where $group_having order by $orderby $limit");
 		while ($r = $this->fetch_array($s)) {
@@ -355,26 +355,22 @@ class mysql
 		}
 		return $data;
 	}
-    function getById($id, $table, $where = "")
-	{
+  function getById($table, $id, $where = "") {
 		$s = $this->query("select * from $table where id = $id $where");
 		$r = $this->fetch_array($s);
 		return $r;
 	}
-	function getOne($table, $where = "1")
-	{
+	function getOne($table, $where = "1") {
 		$s = $this->query("select * from $table where $where");
 		$r = $this->fetch_array($s);
 		return $r;
 	}
-	function getOneSelect($select = "*", $table, $where = "1")
-	{
+	function getOneSelect($select = "*", $table, $where = "1") {
 		$s = $this->query("select $select from $table where $where");
 		$r = $this->fetch_array($s);
 		return $r;
 	}
-	function getFirst($table, $where = "deleted_at is null")
-	{
+	function getFirst($table, $where = "deleted_at is null") {
 		$s = $this->query("select * from $table where $where order by id asc");
 		$n = $this->num_rows($s);
 		if ($n)
@@ -383,8 +379,7 @@ class mysql
 			$r = array();
 		return $r;
 	}
-	function getLast($table, $where = "deleted_at is null")
-	{
+	function getLast($table, $where = "deleted_at is null") {
 		$s = $this->query("select * from $table where $where order by id desc");
 		$n = $this->num_rows($s);
 		if ($n)
@@ -393,17 +388,7 @@ class mysql
 			$r = array();
 		return $r;
 	}
-    
-	// profile
-	function getProfiles()
-	{
-		$data = array();
-		$s = $this->query("select * from profiles where id != 1 and deleted_at is null order by id");
-		while ($r = $this->fetch_array($s)) {
-			array_push($data, $r);
-		}
-		return $data;
-	}
+   
 	// check exist
 	function checkExist($table, $where)
 	{
@@ -418,84 +403,4 @@ class mysql
 		$n = $this->num_rows($s);
 		return $n;
 	}
-	// check cmnd update
-	function checkCMNDUpdate($table, $cmnd, $id)
-	{
-		$in_id = $id;
-		$checkCp = $this->checkExist($table, "copy_id = $id and deleted_at is null");
-		if ($checkCp) {
-			$allid = $this->getAll($table, "copy_id = $id and deleted_at is null");
-			foreach ($allid as $aid) {
-				$in_id .= ',' . $aid['id'];
-			}
-		}
-		$checkCopy = $this->checkExist($table, "copy_id is not null and id = $id and deleted_at is null");
-		if ($checkCopy) {
-			$copy = $this->getOne($table, "copy_id is not null and id = $id and deleted_at is null");
-			$copy_id = $copy['copy_id'];
-			$in_id .= ',' . $copy_id;
-		}
-		$s = $this->query("select id from $table where id NOT IN ($in_id) and cmnd = '$cmnd' and deleted_at is null");
-		$n = $this->num_rows($s);
-		if ($n)
-			$data = 1;
-		else
-			$data = 0;
-		return $data;
-	}
-
-	// getTotal
-	function getTotal($table, $where)
-	{
-		$s = $this->query("select id from $table where $where");
-		$n = $this->num_rows($s);
-		return $n;
-	}
-    // function deQuyXuoi
-    function getCapDuoi($id, $table = "profiles") {
-        $capDuoi = array();
-        $check = $this->checkExist($table, "deleted_at is null and profile_id = $id");
-        if ($check) {
-            $s = $this->query("select id, profile_id, role from $table where profile_id = $id and deleted_at is null");
-            while ($r = $this->fetch_array($s)) {
-                $prId = $r['id'];
-                $role = $r['role'];
-                array_push($capDuoi, $prId);
-                if ($role == 2 || $role == 3) {
-                    $checkExist = $this->checkExist($table, "deleted_at is null and profile_id = $prId");
-                    if ($checkExist) {
-                        $ss = $this->query("select id, profile_id, role from $table where profile_id = $prId and deleted_at is null");
-                        while ($rs = $this->fetch_array($ss)) {
-                            $prId2 = $rs['id'];
-                            $role2 = $rs['role'];
-                            array_push($capDuoi, $prId2);
-                            if ($role2 == 2 || $role2 == 3) {
-                                $checkExist2 = $this->checkExist($table, "deleted_at is null and profile_id = $prId2");
-                                if ($checkExist2) {
-                                    $sss = $this->query("select id, profile_id, role from $table where profile_id = $prId2 and deleted_at is null");
-                                    while ($rss = $this->fetch_array($sss)) {
-                                        $prId3 = $rss['id'];
-                                        $role3 = $rss['role'];
-                                        array_push($capDuoi, $prId3);
-                                        if ($role3 == 3) {
-                                            $checkExist3 = $this->checkExist($table, "deleted_at is null and profile_id = $prId3");
-                                            if ($checkExist3) {
-                                                $sss = $this->query("select id, profile_id, role from $table where profile_id = $prId3 and deleted_at is null");
-                                                while ($rss = $this->fetch_array($sss)) {
-                                                    $prId4 = $rss['id'];
-                                                    array_push($capDuoi, $prId4);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }    
-                
-            }    
-        }
-        return $capDuoi;
-    }
 }

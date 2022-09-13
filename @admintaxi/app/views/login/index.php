@@ -35,13 +35,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <style type="text/css">
-    .login-logo,
-    .register-logo {
-      font-size: 1.3rem;
-      font-weight: 300;
-      margin-bottom: .9rem;
-      text-align: center;
-    }
+    /*.login-logo, .register-logo {font-size: 1.3rem;font-weight: 300;margin-bottom: .9rem;text-align: center;}*/
   </style>
 </head>
 <body class="hold-transition login-page">
@@ -77,7 +71,7 @@
           </div>
           <!-- /.col -->
           <div class="col-6">
-            <button type="button" id="loginBtn" class="btn btn-danger btn-block"><?php echo $lang['sign_in']; ?></button>
+            <button type="button" id="loginBtn" class="btn btn-success btn-block"><?php echo $lang['signIn']; ?></button>
           </div>
           <!-- /.col -->
         </div>
@@ -105,31 +99,32 @@
       let password = $.trim(passwordElement.val());
       let remember = 0;
       if (rememberElement.is(':checked'))
-      remember = 1;
+        remember = 1;
       else 
-      remember = 0;
+        remember = 0;
       if(username.length == 0) {
-      toastr.error('<?php echo $lang['not_input_username'] ?>');
-      usernameElement.addClass('is-invalid');
-      usernameElement.focus();
-      return false;
+        toastr.error('<?php echo $lang['not_input_username'] ?>');
+        usernameElement.addClass('is-invalid');
+        usernameElement.focus();
+        return false;
       } else {
-      usernameElement.addClass('is-valid');
-      usernameElement.removeClass('is-invalid');
+        usernameElement.addClass('is-valid');
+        usernameElement.removeClass('is-invalid');
       }
       if(password.length == 0) {
-      toastr.error('<?php echo $lang['not_input_password'] ?>');
-      passwordElement.addClass('is-invalid');
-      passwordElement.focus();
-      return false;
+        toastr.error('<?php echo $lang['not_input_password'] ?>');
+        passwordElement.addClass('is-invalid');
+        passwordElement.focus();
+        return false;
       } else {
-      passwordElement.addClass('is-valid');
-      passwordElement.removeClass('is-invalid');
+        passwordElement.addClass('is-valid');
+        passwordElement.removeClass('is-invalid');
       }
+      
       btnLogin.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <?php echo $lang['processing'] ?>');
     
       $.post("<?php echo $def['loginProcess']; ?>", {username: username, password: password, remember: remember}, function(respon){
-        btnLogin.html('<?php echo $lang['sign_in']; ?>');
+        btnLogin.html('<?php echo $lang['signIn']; ?>');
         if(respon == '2'){
           toastr.error('<?php echo $lang['invalid_username'] ?>');
           usernameElement.addClass('is-invalid');

@@ -9,14 +9,15 @@
   define("_process", _app."process/");
   define("_processNews", _process.'news/');
   define("_processLogin", _process.'login/');
-  define("_views", _app.'views/');
+  define("_views", _app."views/");
+  define("_viewsRequire", 'app/views/');
   define("_viewNews", _views.'news/');
-  define("_viewLogin", _views."login/");
+  define("_viewLogin", _viewsRequire."login/");
   
   $def = [
-    "loginView" => _viewLogin."index.php",
-    "loginProcess" => _processLogin."index.php",
-    "app" => _app."controllers/app.php",
+    "loginView" => _viewLogin.'index.php',
+    "loginProcess" => _processLogin.'index.php',
+    "app" => "app/controllers/app.php",
     // news
     // news list
     "listNews" => _viewNews.'list.php',
@@ -42,8 +43,8 @@
     'themePlugins' => _theme.'plugins/',
 
     // sidebar
-    'sidebar' => _views.'sidebar.php',
-    'navbar' => _views.'navbar.php',
+    'sidebar' => _viewsRequire.'sidebar.php',
+    'navbar' => _viewsRequire.'navbar.php',
 
     // logout
     "logout" => "logout",

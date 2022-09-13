@@ -9,5 +9,6 @@ $database['name'] = "taxi"; // database name
 // Create connection
 $h = new mysql();
 $con = $h->connect($database['server'],$database['user'],$database['pwd'],$database['name']);
-$h->query("SET NAMES 'utf8'");
+//$h->query("SET NAMES 'utf8'");
+
 $adminemail = "quochoai.2202@gmail.com";

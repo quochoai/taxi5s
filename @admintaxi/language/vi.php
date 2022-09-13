@@ -19,4 +19,5 @@ $lang = [
   'processing' => 'Đang xử lý',
   'login_successful' => 'Đăng nhập thành công',
   'system_error' => 'Hệ thống xảy ra sự cố, vui lòng quay lại sau',
+  
 ];
