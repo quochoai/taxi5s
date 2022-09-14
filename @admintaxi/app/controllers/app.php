@@ -14,6 +14,8 @@
     $role = $profileGet['role'];
   }
   $fullnameAdmin = $profileGet['fullname'];
+  $roleAdmin = $h->getById($prefixTable."admin_roles", $profileId);
+  $text_role = $roleAdmin['roleName'];
   function isMobileDevice() {
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i"
   , $_SERVER["HTTP_USER_AGENT"]);
@@ -39,7 +41,7 @@
   <base href="<?php echo _urladmin; ?>" />
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?php include("title.php"); ?></title>
+  <title><?php require_once $def['requireTitle'] ?></title>
   <link rel="canonical" href="<?php echo _urladmin; ?>"/>
   <meta name="description" content="<?php echo $lang['admin_description'] ?>" />
   <meta name="keywords" content="<?php echo $lang['admin_keyword'] ?>" />
@@ -80,6 +82,7 @@
   <style type="text/css">
     label:not(.form-check-label):not(.custom-file-label) {font-weight: 400;}
     @media screen and (max-width: 1024px) {.text_guide img.responsiveimg {width: 90%; height: auto; margin: 10px 5%}}
+    .cursorPointer {cursor: pointer !important}
   </style>
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo $def['themePlugins']; ?>datatables-bs4/css/dataTables.bootstrap4.min.css" />
@@ -122,7 +125,7 @@
   <script src="<?php echo $def['themePlugins']; ?>datatables-buttons/js/dataTables.buttons.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
   
-  <script src="<?php echo $def['theme']; ?>datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="<?php echo $def['themePlugins']; ?>datatables-buttons/js/buttons.html5.min.js"></script>
 
 
   <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.3.1/js/dataTables.fixedColumns.min.js"></script>
@@ -144,7 +147,7 @@
   <script type="text/javascript" src="<?php echo _tinymce ?>tinymce.min.js"></script>
   <script type="text/javascript">
     tinymce.init({
-      selector: "textarea#content<?php echo $lngVi ?>, textarea#content<?php echo $lngVi ?>_e",
+      selector: "textarea#content<?php echo $lngDefault ?>, textarea#content<?php echo $lngDefault ?>_e",
       theme: "modern",
       width: 750,
       height: 300,
@@ -175,7 +178,14 @@
         num = num.substring(0, num.length - (4 * i + 3)) + ',' + num.substring(num.length - (4 * i + 3));
       return (((sign) ? '' : '-') + num);
     }
+    var lang_url = "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
+    var all_page = "<?php echo $lang['all'] ?>";
+		var updateText = "<?php echo $lang['updateText'] ?>";
+		var deleteText = "<?php echo $lang['deleteText'] ?>";
+		var deleteConfirmText = "<?php echo $lang['deleteConfirmText'] ?>";
+		var thisText = "<?php echo $lang['this'] ?>";
   </script>
+  
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed accent-success">
@@ -185,7 +195,7 @@
     require_once $def['sidebar'];
     ?>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper"><?php require_once "content.php"; ?></div>
+    <div class="content-wrapper"><?php require_once $def['requireContent'] ?></div>
     <!-- /.content-wrapper -->
 
     <!-- Control Sidebar -->
@@ -216,6 +226,6 @@
       });
     });
   </script>
-  <script src="<?php echo $def['themePlugins']; ?>bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  
 </body>
 </html>

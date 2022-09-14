@@ -64,7 +64,7 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <div class="icheck-primary">
+            <div class="icheck-success">
               <input type="checkbox" id="rememerLogin" />
               <label for="rememerLogin"><?php echo $lang['remember'] ?></label>
             </div>

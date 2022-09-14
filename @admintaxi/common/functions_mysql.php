@@ -390,17 +390,27 @@ class mysql
 	}
    
 	// check exist
-	function checkExist($table, $where)
-	{
+	function checkExist($table, $where) {
 		$s = $this->query("select id from $table where $where");
 		$n = $this->num_rows($s);
 		return $n;
 	}
 	// get data profile has exist not id
-	function checkExistId($table, $where, $id)
-	{
+	function checkExistId($table, $where, $id) {
 		$s = $this->query("select id from $table where $where and id != $id");
 		$n = $this->num_rows($s);
 		return $n;
+	}
+	// get max with field specific
+	function getMax($table, $fieldMax, $fieldAlias, $where = 1) {
+		$s = $this->query("select id from $table where $where");
+		$n = $this->num_rows($s);
+		if ($n) {
+			$ss = $this->query("select max($fieldMax) as $fieldAlias from $table where $where");
+			$r = $this->fetch_array($ss);
+			$max = $r[$fieldAlias];
+		} else
+			$max = 0;
+		return $max;
 	}
 }

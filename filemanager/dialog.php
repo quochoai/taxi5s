@@ -47,6 +47,7 @@ setcookie('last_position',$subdir,time() + (86400 * 7));
 if ($subdir == "/") { $subdir = ""; }
 
 // If hidden folders are specified
+/*
 if(count($hidden_folders)){
 	// If hidden folder appears in the path specified in URL parameter "fldr"
 	$dirs = explode('/', $subdir);
@@ -58,7 +59,7 @@ if(count($hidden_folders)){
 		}
 	}
 }
-
+*/
 /***
  *SUB-DIR CODE
  ***/
@@ -262,12 +263,12 @@ $get_params = http_build_query($get_params);
 	<script src="js/jPlayer/jquery.jplayer/jquery.jplayer.js"></script>
 	<script src="js/modernizr.custom.js"></script>
 	<?php
-	if ($aviary_active){
-	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) { ?>
-	    <script src="https://dme0ih8comzn4.cloudfront.net/imaging/v2/editor.js"></script>
-	<?php }else{ ?>
-	    <script src="http://feather.aviary.com/imaging/v2/editor.js"></script>
-	<?php }} ?>
+	if ($aviary_active){ ?>
+		<!--<script type="text/javascript" src="aviary-editor.js"></script>-->
+		<script src="https://cdn.jsdelivr.net/npm/aviary-editor@3.1.0/aviary-editor.js"></script>
+	<?php } ?>
+	
+
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>

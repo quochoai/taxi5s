@@ -1,7 +1,8 @@
 <?php
 session_start();
-mb_internal_encoding('UTF-8');
-date_default_timezone_set('Europe/Rome');
+//mb_internal_encoding('UTF-8');
+//header('Content-type: text/plain; charset=utf-8');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ $config = array(
 	|
 	*/
 
-	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'],
+	'base_url' => ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] && ! in_array(strtolower($_SERVER['HTTPS']), array( 'off', 'no' ))) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'].'/taxi5s',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -87,7 +88,7 @@ $config = array(
 	| DO NOT put inside upload folder
 	|
 	*/
-	'thumbs_base_path' => '../thumbs/',
+	'thumbs_base_path' => 'thumbs/',
 
 	/*
 	|--------------------------------------------------------------------------
