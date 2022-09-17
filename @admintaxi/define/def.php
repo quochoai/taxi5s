@@ -23,7 +23,7 @@
   
   $def = [
     "loginView" => _viewLogin.'index.php',
-    "loginProcess" => _processLogin.'index.php',
+    "loginProcess" => _processLogin,
     "app" => "app/controllers/app.php",
     'requireTitle' => _viewController.'title.php',
     'requireContent' => _viewController.'content.php',
@@ -33,11 +33,11 @@
     'actionCategoriesNews' => 'categories-news',
     // news category
     'listCateNews' => _viewRequireCateNews.'list.php',
-    "listDataCateNews" => _viewRequireCateNews.'data.php',
-    "listDataCateNewsJs" => _viewRequireCateNews.'data.js',
+    "listDataCateNews" => _viewRequireCateNews.'data/',
+    "listDataCateNewsJs" => _viewRequireCateNews.'data/data.js',
     "listCateNewsDeleted" => _viewRequireCateNews.'listDeleted.php',
-    "listDataCateNewsDeleted" => _viewRequireCateNews.'dataDeleted.php',
-    "listDataCateNewsDeletedJs" => _viewRequireCateNews.'dataDeleted.js',
+    "listDataCateNewsDeleted" => _viewRequireCateNews.'dataDeleted/',
+    "listDataCateNewsDeletedJs" => _viewRequireCateNews.'dataDeleted/dataDeleted.js',
     'imgUploadCateNews' => _imgUpload.'cateNews/',
     'imgUploadCateNewsRealPath' => _ImgUploadRealPath.'cateNews/',
     // news category add

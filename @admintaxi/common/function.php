@@ -1,7 +1,9 @@
 <?php
+	function _e($string) {
+		echo $string;
+	}
 // image resize
- function resizeImage($w, $h, $fileupload, $path, $name_field, $name_save)
- {
+ function resizeImage($w, $h, $fileupload, $path, $name_field, $name_save) {
 	$max_width = $w;
 	$max_height = $h;
 	$ext = getExt($fileupload);

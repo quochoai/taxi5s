@@ -182,8 +182,23 @@
     var all_page = "<?php echo $lang['all'] ?>";
 		var updateText = "<?php echo $lang['updateText'] ?>";
 		var deleteText = "<?php echo $lang['deleteText'] ?>";
+    var deleteMultiText = "<?php echo $lang['deleteMultiText'] ?>";
 		var deleteConfirmText = "<?php echo $lang['deleteConfirmText'] ?>";
+    var deleteMultiConfirmText = "<?php echo $lang['deleteMultiConfirmText'] ?>";
 		var thisText = "<?php echo $lang['this'] ?>";
+    var notChooseAny = "<?php echo $lang['notChooseAny'] ?>";
+    var notFill = "<?php echo $lang['youNotFill'] ?>";
+    var notChoose = "<?php echo $lang['youNotChoose'] ?>";
+    var lngDefault = "<?php echo $lngDefault ?>";
+    var processing = "<?php echo $lang['processing'] ?>";
+    var system_error = "<?php echo $lang['system_error'] ?>";
+    var saveText = "<?php echo $lang['save'] ?>";
+    var addSuccessText = "<?php echo $lang['addSuccess'] ?>";
+    var updateSuccessText = "<?php echo $lang['updateSuccess'] ?>";
+    var deleteSuccessText = "<?php echo $lang['deleteSuccess'] ?>";
+    var approveSuccessText = "<?php echo $lang['approveSuccess'] ?>";
+    var sessionTimeout = "<?php echo $lang['sessionTimeout'] ?>";
+
   </script>
   
 </head>

@@ -21,29 +21,30 @@
 							</div>
 							<button id="ok" type="button" class="btn btn-success ml-1 mr-1"><?php echo $lang['search'] ?></button>
 							<button id="btnReset" type="button" class="btn btn-success ml-1 mr-1"><?php echo $lang['all'] ?></button>
+              <button id="delete_multi" type="button" class="btn btn-danger ml-1 mr-1"><?php echo $lang['deleteMultiText'] ?></button>
 						</div>
             <div id="passreset" class="text-center"></div>
             <table id="categories" class="table table-bordered table-hover table-striped">
               <thead>
-              <tr>
-                <th width="7%" align="center"><?php echo $lang['no.'] ?></th>
-                <th width="15%" align="center"><?php echo $lang['titleForm'] ?></th>
-                <th align="center"><?php echo $lang['imageForm'] ?></th>                
-                <th align="center"><?php echo $lang['activeForm'] ?></th>
-                <th align="center"><?php echo $lang['sortForm'] ?></th>
-                <th align="center"><?php echo $lang['showHideForm'] ?></th>
-                <th width="15%" align="center"><?php echo $lang['actions'] ?></th>
-              </tr>
+                <tr>
+                  <th width="5%" align="center"><?php echo $lang['no.'] ?></th>
+                  <th width="45%" align="center"><?php echo $lang['titleForm'] ?></th>
+                  <th width="15%" align="center"><?php echo $lang['imageForm'] ?></th>                
+                  <th width="10%" align="center"><?php echo $lang['activeForm'] ?></th>
+                  <th width="5%" align="center"><?php echo $lang['sortForm'] ?></th>
+                  <th width="9%" align="center"><?php echo $lang['showHideForm'] ?></th>
+                  <th width="9%" align="center"><?php echo $lang['actions'] ?></th>
+                </tr>
               </thead>
               <tfoot>
 								<tr>
-									<th width="7%" align="center"><?php echo $lang['no.'] ?></th>
-									<th width="15%" align="center"><?php echo $lang['titleForm'] ?></th>
-									<th align="center"><?php echo $lang['imageForm'] ?></th>                
-									<th align="center"><?php echo $lang['activeForm'] ?></th>
-									<th align="center"><?php echo $lang['sortForm'] ?></th>
-									<th align="center"><?php echo $lang['showHideForm'] ?></th>
-									<th width="15%" align="center"><?php echo $lang['actions'] ?></th>
+									<th width="5%" align="center"><?php echo $lang['no.'] ?></th>
+									<th width="45%" align="center"><?php echo $lang['titleForm'] ?></th>
+									<th width="15%" align="center"><?php echo $lang['imageForm'] ?></th>                
+									<th width="10%" align="center"><?php echo $lang['activeForm'] ?></th>
+									<th width="5%" align="center"><?php echo $lang['sortForm'] ?></th>
+									<th width="9%" align="center"><?php echo $lang['showHideForm'] ?></th>
+									<th width="9%" align="center"><?php echo $lang['actions'] ?></th>
 								</tr>
               </tfoot>
             </table>
@@ -59,30 +60,9 @@
   <!-- /.container-fluid -->
 </section>
 <!-- add -->
-<div class="modal fade" id="modal-add">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-success">
-                <h5 class="modal-title text-uppercase"><?php echo $lang['addCateNewsText'] ?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="text-white">&times;</span>
-                </button>
-            </div>
-            <!--  -->
-            <form method="post" action="<?php echo $def['cateNewsAddProcess'] ?>" id="form_add" enctype="multipart/form-data">
-                <div class="modal-body container-fluid">
-                    <div class="row" id="cateNewsAdd"></div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="reset" class="btn btn-default"><?php echo $lang['reset'] ?> <i class="fas fa-undo"></i></button>
-                    <button type="submit" id="addCateNews" class="btn btn-success"><?php echo $lang['save'] ?> <i class="fas fa-save"></i></button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+<div class="modal fade" id="modal-add"></div>
+<!-- update -->
+<div class="modal fade" id="modal-update"></div>
 
 <!-- /.content -->
 <script type="text/javascript">
@@ -96,17 +76,3 @@
     var cateNewsText = "<?php echo $lang['cateNewsText'] ?>";
 </script>
 <script src="<?php echo $def['listDataCateNewsJs'] ?>"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-      $(document).on('click', '.delete', function(){
-        if (confirm("<?php echo $lang['confirm_delete'] ?>")) {
-          var id = $(this).data('id');
-          $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-          $(this).parent().parent().hide();
-          $.post("<?php echo $link_delete ?>", { id: id }, function(data){
-              
-          });
-        }
-      });        
-    });
-</script>
