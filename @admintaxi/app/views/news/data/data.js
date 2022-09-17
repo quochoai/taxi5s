@@ -1,11 +1,12 @@
 jQuery(document).ready(function($) {
   fill_datatable();
-  function fill_datatable(search_value) {
-		if (typeof search_value === 'undefined'){
+  function fill_datatable(search_value, cateID) {
+		if (typeof search_value === 'undefined')
 			search_value = null;
-		}
+		if (typeof cateID === 'undefined')
+			cateID = 0;
 		$(table_id).DataTable({
-			"aoColumnDefs": [ {"bSortable" : false, "bAutoWidth": true, "aTargets" : [2,3,4,5] } ],
+			"aoColumnDefs": [ {"bSortable" : false, "bAutoWidth": true, "aTargets" : [5] } ],
 			"paging": true,
 			"lengthChange": true,
 			"ordering": false,
@@ -30,10 +31,10 @@ jQuery(document).ready(function($) {
 			processing: true,
 			serverSide: true,
 			ajax: {
-				"url": backend_cate_news_list,
+				"url": backend_news_list,
 				"dataType": "json",
 				"type": "GET",
-				"data":{search_value: search_value}
+				"data":{search_value: search_value, cateID: cateID}
 			},
 			"footerCallback": function ( row, data, start, end, display ) {
 				var api = this.api(), data;
@@ -44,28 +45,31 @@ jQuery(document).ready(function($) {
 			},
 			columns: [
 				{ data: 'no', name: 'no',className: "text-center text-nowrap small_text" },
+				{ data: 'titleNews', name: 'titleNews', className: "text-left text-nowrap small_text" },
 				{ data: 'titleCate', name: 'titleCate', className: "text-left text-nowrap small_text" },
-				{ data: 'imageCate', name: 'imageCate',className: "text-center text-nowrap small_text" },
+				{ data: 'imageNews', name: 'imageNews',className: "text-center text-nowrap small_text" },
+				{ data: 'postDate', name: 'postDate',className: "text-center text-nowrap small_text" },
 				{ data: 'sortOrder', name: 'sortOrder',className: "text-center text-nowrap small_text" },
 				{ data: 'active', name: 'active', className: "text-center text-nowrap small_text" },
-				/*{ data: 'showHide', name: 'showHide', className: "text-center text-nowrap" },*/
 				{ data: 'actions', name: 'actions', className: "text-center text-nowrap" }
 			]
 		});
   }
   $(document).on('click', '#ok', function(){
-		var search_value = $.trim($('#search_value').val());
-		if (search_value != '') {
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
+		if (search_value != '' || cateID != 0) {
 			$(table_id).DataTable().destroy();
-			fill_datatable(search_value);
+			fill_datatable(search_value, cateID);
 		}
   });
   $('input:not([type="submit"])').keypress(function (e) {
 		if (e.which == 13) {
-			var search_value = $.trim($('#search_value').val());
-			if (search_value != '') {
+			let search_value = $.trim($('#search_value').val());
+			let cateID = $('#filterCateID').val();
+			if (search_value != '' || cateID != 0) {
 				$(table_id).DataTable().destroy();
-				fill_datatable(search_value);
+				fill_datatable(search_value, cateID);
 			}
 		}
   });
@@ -74,7 +78,7 @@ jQuery(document).ready(function($) {
 		window.location.reload();
   });
 	let multi_id = [];
-	$('#categories tbody').on('click', 'tr', function() {
+	$('#news tbody').on('click', 'tr', function() {
 		let id = this.id;
 		let index = $.inArray(id, multi_id);
 		if (index === -1)
@@ -86,33 +90,37 @@ jQuery(document).ready(function($) {
 	// delete
 	$(document).on('click', '#delete_multi', function() {
 		let id = multi_id;
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
 		if (multi_id.length < 1)
 			alert(notChooseAny);
 		else {
 			let conf = "";
 			if (multi_id.length == 1)
-				conf = deleteConfirmText + cateNewsText + ' ' + thisText + ' ?';
+				conf = deleteConfirmText + newsText + ' ' + thisText + ' ?';
 			else
-				conf = deleteMultiConfirmText + cateNewsText + ' ' + thisText + ' ?';
+				conf = deleteMultiConfirmText + newsText + ' ' + thisText + ' ?';
 			if (confirm(conf)) {
 				$('#delete_multi').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 				$.post(processDelete, {id: id}, function(data) {
 					$('#delete_multi').html('<i class="fas fa-trash-alt"></i> ' + deleteMultiText);
 					$(table_id).DataTable().destroy();
-					fill_datatable('');
+					fill_datatable(search_value, cateID);
 				});
 			}
 		}
 	});
 	$(document).on('click', '.delete', function() {
 		let id = $(this).attr('data-id');
-		let conf = deleteConfirmText + cateNewsText + ' ' + thisText + ' ?';
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
+		let conf = deleteConfirmText + newsText + ' ' + thisText + ' ?';
 		if (confirm(conf)) {
 			$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 			$.post(processDelete, {id: id}, function(data) {
 				$(this).html('<i class="fas fa-trash-alt"></i>');
 				$(table_id).DataTable().destroy();
-				fill_datatable('');
+				fill_datatable(search_value, cateID);
 			});
 		}
 	});
@@ -120,44 +128,38 @@ jQuery(document).ready(function($) {
 	$(document).on('click', '.active', function() {
 		let id = $(this).attr('rel');
 		let act = $(this).attr('data-active');
-		let conf = "";
-		if (act == 1)
-			conf = activeConfirmText + cateNewsText + ' ' + thisText + ' ? ' + effectTo + activeForm + ' ' + multiple + ' ' + newsText + ' ' + theSameCate;
-		else 
-			conf = deactiveConfirmText + cateNewsText + ' ' + thisText + ' ? ' + effectTo + deactiveForm + ' ' + multiple + ' ' + newsText + ' ' + theSameCate;
-		if (confirm(conf)) {
-			$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-			$.post(processActive, {id: id, active: act}, function(data) {
-				$(table_id).DataTable().destroy();
-				fill_datatable('');
-			});
-		}
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
+		
+		$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+		$.post(processActive, {id: id, active: act}, function(data) {
+			$(table_id).DataTable().destroy();
+			fill_datatable(search_value, cateID);
+		});
 	});
 	// show / hide
 	$(document).on('click', '.showHideUpdate', function() {
 		let id = $(this).attr('rel');
 		let hs = $(this).attr('data-hs');
-		let conf = "";
-		if (hs == 1)
-			conf = showConfirmText + cateNewsText + ' ' + thisText + ' ? ' + effectTo + showText + ' ' + multiple + ' ' + newsText + ' ' + theSameCate;
-		else 
-			conf = hideConfirmText + cateNewsText + ' ' + thisText + ' ? ' + effectTo + hideText + ' ' + multiple + ' ' + newsText + ' ' + theSameCate;
-		if (confirm(conf)) {
-			$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-			$.post(processShowHide, {id: id, showHide: hs}, function(data) {
-				$(table_id).DataTable().destroy();
-				fill_datatable('');
-			});
-		}
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
+		
+		$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+		$.post(processShowHide, {id: id, showHide: hs}, function(data) {
+			$(table_id).DataTable().destroy();
+			fill_datatable(search_value, cateID);
+		});
 	});
 	// sort
 	$(document).on('change', '.sortUpdate', function() {
 		let id = $(this).attr('id');
 		let sortOrder = $(this).val();
+		let search_value = $.trim($('#search_value').val());
+		let cateID = $('#filterCateID').val();
 		$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 		$.post(processSort, {id: id, sortOrder: sortOrder}, function(data) {
 			$(table_id).DataTable().destroy();
-			fill_datatable('');
+			fill_datatable(search_value, cateID);
 		});
 	}).change();
 	// add
@@ -168,13 +170,13 @@ jQuery(document).ready(function($) {
       modalAdd.modal('show');
     });    
   });
-	let addCate = '#addCateNews';
-	let btnAddCate = $(addCate);
-	$(document).on('click', addCate, function() {
-		let titleCateElement = $('#titleCate'+lngDefault);		
+	let addNews = '#addNews';
+	let btnAddNews = $(addNews);
+	$(document).on('click', addNews, function() {
+		let titleCateElement = $('#titleNews'+lngDefault);		
 		let titleCate = $.trim(titleCateElement.val());
 		if (titleCate == '') {
-			toastr.error(notFill + 'tiêu đề ' + cateNewsText);
+			toastr.error(notFill + 'tiêu đề ' + newsText);
 			titleCateElement.addClass('is-invalid');
 			titleCateElement.focus();
 			return false;
@@ -185,8 +187,8 @@ jQuery(document).ready(function($) {
 		let formAdd = $('#form_add');
 		formAdd.ajaxForm({
 			beforeSend: function() {
-				btnAddCate.attr("disabled",true);
-				btnAddCate.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnAddNews.attr("disabled",true);
+				btnAddNews.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -195,17 +197,18 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-			 	btnAddCate.html(saveText + ' <i class="fas fa-save">');
-				btnAddCate.removeAttr('disabled');
+				btnAddNews.html(saveText + ' <i class="fas fa-save">');
+				btnAddNews.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){
 					toastr.success(addSuccessText);
 					modalAdd.modal('hide');
 					$(table_id).DataTable().state.clear();
-					let search_value = '';
+					let search_value = $.trim($('#search_value').val());
+					let cateID = $('#filterCateID').val();
 					$(table_id).DataTable().destroy();
-					fill_datatable(search_value);
+					fill_datatable(search_value, cateID);
 				} else {   
 					if (n[0] == '5') {
 						toastr.error(sessionTimeout);
@@ -229,13 +232,13 @@ jQuery(document).ready(function($) {
       modalUpdate.modal('show');
     });    
   });
-	let updateCate = '#updateCateNews';
-	let btnUpdateCate = $(updateCate);
-	$(document).on('click', updateCate, function() {
-		let titleCateElement_e = $('#titleCate'+lngDefault+'_e');		
+	let updateNews = '#updateNews';
+	let btnUpdateNews = $(updateNews);
+	$(document).on('click', updateNews, function() {
+		let titleCateElement_e = $('#titleNews'+lngDefault+'_e');		
 		let titleCate_e = $.trim(titleCateElement_e.val());
 		if (titleCate_e == '') {
-			toastr.error(notFill + 'tiêu đề ' + cateNewsText);
+			toastr.error(notFill + 'tiêu đề ' + newsText);
 			titleCateElement_e.addClass('is-invalid');
 			titleCateElement_e.focus();
 			return false;
@@ -246,8 +249,8 @@ jQuery(document).ready(function($) {
 		let formUpdate = $('#form_update');
 		formUpdate.ajaxForm({
 			beforeSend: function() {
-				btnUpdateCate.attr("disabled",true);
-				btnUpdateCate.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnUpdateNews.attr("disabled",true);
+				btnUpdateNews.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -256,16 +259,17 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-			 	btnUpdateCate.html(updateText + ' <i class="fas fa-edit">');
-				btnUpdateCate.removeAttr('disabled');
+			 	btnUpdateNews.html(updateText + ' <i class="fas fa-edit">');
+				btnUpdateNews.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){
 					toastr.success(updateSuccessText);
 					modalUpdate.modal('hide');
-					let search_value = '';
+					let search_value = $.trim($('#search_value').val());
+					let cateID = $('#filterCateID').val();
 					$(table_id).DataTable().destroy();
-					fill_datatable(search_value);
+					fill_datatable(search_value, cateID);
 				} else {   
 					if (n[0] == '5') {
 						toastr.error(sessionTimeout);

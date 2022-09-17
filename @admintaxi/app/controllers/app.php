@@ -198,7 +198,17 @@
     var deleteSuccessText = "<?php echo $lang['deleteSuccess'] ?>";
     var approveSuccessText = "<?php echo $lang['approveSuccess'] ?>";
     var sessionTimeout = "<?php echo $lang['sessionTimeout'] ?>";
-
+    var activeForm = "<?php echo $lang['activeForm'] ?>";
+    var deactiveForm = "<?php echo $lang['deactiveForm'] ?>";
+    var activeConfirmText = "<?php echo $lang['activeConfirmText'] ?>";
+    var deactiveConfirmText = "<?php echo $lang['deactiveConfirmText'] ?>";
+    var effectTo = "<?php echo $lang['effectTo'] ?>";
+    var theSameCate = "<?php echo $lang['theSameCate'] ?>";
+    var multiple = "<?php echo $lang['multiple'] ?>";
+    var showText = "<?php echo $lang['showText'] ?>";
+    var hideText = "<?php _e($lang['hideText']) ?>";
+    var showConfirmText = "<?php echo $lang['showConfirmText'] ?>";
+    var hideConfirmText = "<?php echo $lang['hideConfirmText'] ?>";
   </script>
   
 </head>
@@ -220,6 +230,7 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+  <div id="loading" class="d-none"><div></div></div> 
   <script type="text/javascript">
     function isNumber(n) {
       return /^-?[\d.]+(?:e-?\d+)?$/.test(n);

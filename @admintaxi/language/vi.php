@@ -28,7 +28,16 @@ $lang = [
   // news
   'manageNews' => 'Quản lý tin tức',
   'newsText' => 'tin tức',
-
+  'addNewsText' => 'Thêm tin tức mới',
+  'updateNewsText' => 'Cập nhật tin tức',
+  'postDate' => 'Ngày đăng',
+  // tags
+  'manageTags' => 'Quản lý Tags',
+  'tagText' => 'tag',
+  'addTagText' => 'Thêm tag mới',
+  'updateTagText' => 'Cập nhật tag',
+  'titleTag' => 'Tên tag',
+  'chooseTag' => 'Chọn tag',
 
   // general
   'this' => 'này',
@@ -51,9 +60,16 @@ $lang = [
   'sortForm' => 'Sắp xếp',
   'showHideForm' => 'Hiển thị',
   'showText' => 'Hiển thị',
+  'showConfirmText' => 'Bạn chắc chắn muốn hiển thị ',
+  'hideConfirmText' => 'Bạn chắc chắn muốn ẩn ',
   'hideText' => 'Ẩn',
   'activeForm' => 'Kích hoạt',
+  'activeConfirmText' => 'Bạn chắc chắn muốn kích hoạt ',
+  'deactiveConfirmText' => 'Bạn chắc chắn muốn hủy kích hoạt ',
+  'effectTo' => 'Việc này sẽ ',
+  'theSameCate' => 'cùng danh mục',
   'deactiveForm' => 'Hủy kích hoạt',
+  'multiple' => 'những',
   'appoveForm' => 'Duyệt',
   'approveConfirmText' => 'Bạn chắc chắn muốn duyệt ',
   'notChooseAny' => 'Bạn chưa chọn dòng nào',
@@ -70,5 +86,10 @@ $lang = [
   'updateSuccess' => 'Cập nhật thành công',
   'deleteSuccess' => 'Xóa thành công',
   'approveSuccess' => 'Duyệt thành công',
-  
+  'chooseCate' => 'Chọn danh mục',
+  'cate' => 'Danh mục',
+  'shortContent' => 'Nội dung ngắn',
+  'contentArticle' => 'Nội dung',
+  'numberViews' => 'Lượt xem',
+  'tags' => 'Tags',
 ];

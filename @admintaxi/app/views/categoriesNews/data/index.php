@@ -40,12 +40,12 @@
 				$textActive = $lang['deactiveForm'].' '.$lang['cateNewsText'].' '.$lang['this'];
 				$activeIcon = '<i class="fas fa-check-circle"></i>';
 				$classActive = ' text-success';
-				$act = 1;
+				$act = 0;
 			} else {
 				$textActive = $lang['activeForm'].' '.$lang['cateNewsText'].' '.$lang['this'];
 				$activeIcon = '<i class="far fa-circle"></i>';
 				$classActive = ' text-danger';
-				$act = 0;
+				$act = 1;
 			}
 			$active = '<a class="text-center'.$classActive.' active cursorPointer" rel="'.$cateNews['id'].'" title="'.$textActive.'" data-active="'.$act.'"><h4>'.$activeIcon.'</h4></a>';
 			$titleCate = $cateNews['titleCate'];
@@ -60,12 +60,12 @@
 				$textShowHide = $lang['showText'].' '.$lang['cateNewsText'].' '.$lang['this'];
 				$showHideIcon = '<i class="far fa-circle"></i>';
 				$classSH = ' text-danger';
-				$hs = 0;
+				$hs = 1;
 			} else {
 				$textShowHide = $lang['hideText'].' '.$lang['cateNewsText'].' '.$lang['this'];
 				$showHideIcon = '<i class="fas fa-check-circle"></i>';
 				$classSH = ' text-success';
-				$hs = 1;
+				$hs = 0;
 			}
 
 			$showHide = '<a class="text-center'.$classSH.' showHideUpdate cursorPointer" rel="'.$cateNews['id'].'" title="'.$textShowHide.'" data-hs="'.$hs.'"><h4>'.$showHideIcon.'</h4></a>';
@@ -78,7 +78,7 @@
 				"imageCate" => $img, 
 				"active" => $active, 
 				"sortOrder" => $sortOrder, 
-				"showHide" => $showHide,
+				//"showHide" => $showHide,
 				'actions' => $actions
 			);
 			$no++;

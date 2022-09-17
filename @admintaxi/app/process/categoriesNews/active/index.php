@@ -9,17 +9,13 @@
 			$muser = explode("cookie", $islogin[0]);
 			$user_id = $muser[1];
 		}
-    $ids = $_POST['id'];
+    $id = $_POST['id'];
+    $data['active'] = $_POST['active'];
+    $dataNews['active'] = $_POST['active'];
     $table = $prefixTable.$def['tableCategoriesNews'];
     $tableNews = $prefixTable.$def['tableNews'];
-    if (is_array($ids)) {
-      foreach ($ids as $id) {
-        $result = $h->softDeleteBy($table, " where id = $id", $user_id);
-        $resultNews = $h->softDeleteBy($tableNews, " where cateID = $id", $user_id);
-      }
-    } else {
-      $result = $h->softDeleteBy($table, " where id = $ids", $user_id);
-      $resultNews = $h->softDeleteBy($tableNews, " where cateID = $ids", $user_id);
-    }
+    
+    $result = $h->updateDataBy($data, $table, " where id = $id", $user_id);
+    $resultNews = $h->updateDataBy($dataNews, $tableNews, " where cateID = $id", $user_id);
   } else
     echo '5;error';

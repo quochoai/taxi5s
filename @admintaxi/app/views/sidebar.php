@@ -23,6 +23,12 @@
               <p><?php echo $lang['manageNews'] ?></p>
             </a>
           </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionTags']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionTags'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionTags']) echo ' active' ?>">
+              <i class="fas fa-tags nav-icon"></i>
+              <p><?php echo $lang['manageTags'] ?></p>
+            </a>
+          </li>
           <!--
           <li class="nav-item has-treeview<?php if (in_array($pqh[0], $array_openaccount)) echo ' menu-open'; ?>">
             <a href="javascript:void(0);" class="nav-link">

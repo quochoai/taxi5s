@@ -10,8 +10,8 @@
 			$user_id = $muser[1];
 		}
     $id = $_POST['id'];
-    $data['sortOrder'] = $_POST['sortOrder'];
-    $table = $prefixTable.$def['tableCategoriesNews'];    
+    $data['active'] = $_POST['active'];
+    $table = $prefixTable.$def['tableNews'];    
     $result = $h->updateDataBy($data, $table, " where id = $id", $user_id);
   } else
     echo '5;error';

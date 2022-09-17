@@ -28,9 +28,10 @@
     'requireTitle' => _viewController.'title.php',
     'requireContent' => _viewController.'content.php',
     'dashboard' => _viewsRequire.'dashboard.php',
-    // news
+    // action
     'actionNews' => 'news',
     'actionCategoriesNews' => 'categories-news',
+    'actionTags' => 'tags',
     // news category
     'listCateNews' => _viewRequireCateNews.'list.php',
     "listDataCateNews" => _viewRequireCateNews.'data/',
@@ -48,10 +49,16 @@
     'cateNewsUpdateProcess' => _processCateNews.'update/',
     // news category delete
     "cateNewsDeleteProcess" => _processCateNews.'delete/',
+    // news category active
+    "cateNewsActiveProcess" => _processCateNews.'active/',
+    // news category sort
+    "cateNewsSortProcess" => _processCateNews.'sort/',
+    // news category show hide
+    "cateNewsShowHideProcess" => _processCateNews.'show/',
     // news list
     "listNews" => _viewRequireNews.'list.php',
-    "listDataNews" => _viewNews.'data.php',
-    "listDataNewsJs" => _viewNews.'data.js',
+    "listDataNews" => _viewNews.'data/',
+    "listDataNewsJs" => _viewNews.'data/data.js',
     "listNewsDeleted" => _viewRequireNews.'listDeleted.php',
     "listDataNewsDeleted" => _viewNews.'dataDeleted.php',
     "listDataNewsDeletedJs" => _viewNews.'dataDeleted.js',
@@ -67,6 +74,12 @@
     "newsDeleteProcess" => _processNews.'delete/',
     // news approve
     "newsApproveProcess" => _processNews.'approve/',
+    // news active
+    "newsActiveProcess" => _processNews.'active/',
+    // news sort
+    "newsSortProcess" => _processNews.'sort/',
+    // news show/hide
+    "newsShowHideProcess" => _processNews.'show/',
     // theme
     "themeDist" => _theme.'dist/',
     "themeJs" => _theme.'js/',
