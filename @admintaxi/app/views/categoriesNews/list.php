@@ -24,7 +24,7 @@
               <button id="delete_multi" type="button" class="btn btn-danger ml-1 mr-1"><?php echo $lang['deleteMultiText'] ?></button>
 						</div>
             <div id="passreset" class="text-center"></div>
-            <table id="categories" class="table table-bordered table-hover"> <!--  table-striped -->
+            <table id="categories" class="table table-bordered table-hover table-striped">
               <thead>
                 <tr>
                   <th width="5%" align="center"><?php echo $lang['no.'] ?></th>

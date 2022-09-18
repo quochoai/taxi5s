@@ -142,7 +142,7 @@
     "adminActiveProcess" => _processAdmin.'active/',
     // admin change password
     "adminChangePassword" => _viewAdmin.'changePassword/',
-    'adminUpdateProcess' => _processAdmin.'changePassword/',
+    'adminChangePasswordProcess' => _processAdmin.'changePassword/',
 
     // theme
     "themeDist" => _theme.'dist/',

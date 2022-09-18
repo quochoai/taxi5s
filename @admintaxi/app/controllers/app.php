@@ -209,6 +209,11 @@
     var hideText = "<?php _e($lang['hideText']) ?>";
     var showConfirmText = "<?php echo $lang['showConfirmText'] ?>";
     var hideConfirmText = "<?php echo $lang['hideConfirmText'] ?>";
+    let linkChangePassword = "<?php echo $def['adminChangePassword'] ?>";
+    var oldPasswordText = "<?php echo $lang['oldPassword'] ?>";
+    var newPasswordText = "<?php echo $lang['newPassword'] ?>";
+    var newPasswordConfirmText = "<?php echo $lang['newPasswordConfirm'] ?>";
+    var notMatchPassword = "<?php echo $lang['notMatchPassword'] ?>";
   </script>
   
 </head>
@@ -230,6 +235,7 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+  <div class="modal fade" id="modal-change-password"></div>
   <div id="loading" class="d-none"><div></div></div> 
   <script type="text/javascript">
     function isNumber(n) {
@@ -249,6 +255,13 @@
       $('#reservationdate, #datecheck, #datereject, #dateup, #datepos, #datefresh, #reservationdate_s, #datecheck_s, #datereject_s, #dateup_s, #datepos_s, #datefresh_s, #reservationdate_e, #datecheck_e, #datereject_e, #dateup_e, #datepos_e, #datefresh_e, #date_cmnd_e, #date_end_1, #date_end_2, #date_end_tctd1, #date_end_tctd2, #date_end_tctd3, #date_end_tctd4, #date_end_tctd5, #date_end_tctd6, #date_end_tctd7, #date_end_tctd8, #date_end_tctd9, #date_end_tctd10, #from_date, #to_date, #filterngaylamlai, #ngay_hieu_luc').datetimepicker({
         timePicker: false,
         format: 'DD/MM/YYYY'
+      });
+      let modalChangePassword = $('#modal-change-password');
+      $(document).on('click', '.changePassword', function(){
+        $.post(linkChangePassword, function(dataResponse){
+          modalChangePassword.html(dataResponse);
+          modalChangePassword.modal('show');
+        });
       });
     });
   </script>

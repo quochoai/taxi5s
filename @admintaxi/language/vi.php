@@ -101,4 +101,11 @@ $lang = [
   'reload' => 'Tải lại trang',
   'infoText' => 'Trang thông tin',
   'changePassword' => 'Thay đổi mật khẩu',
+  'oldPassword' => 'Mật khẩu cũ',
+  'invalidOldPassword' => 'Mật khẩu cũ chưa đúng',
+  'newPassword' => 'Mật khẩu mới',
+  'newPasswordConfirm' => 'Xác nhận mật khẩu mới',
+  'notMatchPassword' => 'Mật khẩu chưa trùng khớp',
+  'change' => 'Thay đổi',
+  'changePasswordSuccess' => 'Thay đổi mật khẩu thành công',
 ];

@@ -293,7 +293,7 @@ class mysql
     return $randomString;
 	}
 
-	function encodePQH($p, $hashkey) {
+	function encodePQH($p, $hashkey = 'tonyDan') {
 		$mk = "#*@".$hashkey.$p.$hashkey."#@*".$hashkey;
 		$pass = md5($mk).$hashkey;
 		$p1 = $hashkey.substr($pass, 2, 17)."7011410411";
@@ -307,11 +307,9 @@ class mysql
 		$password = $pass4 . ":" . substr($pass3, 3, 20) . "@$#@!%*$";
 		return $password;
 	}
-	
     
 	function loginUser($user, $p, $remember, $table = 'admins', $column_user = 'username', $column_password = 'password') {
-	  $hashkey = "tonyDan";
-		$password = $this->encodePQH($p, $hashkey);
+		$password = $this->encodePQH($p);
 		$su = $this->query("select * from $table where $column_user = '$user' and active = 1 and deleted_at is null");
 		$nu = $this->num_rows($su);
 		if ($nu) {
