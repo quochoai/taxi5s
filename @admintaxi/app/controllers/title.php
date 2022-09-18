@@ -13,6 +13,9 @@
       case $def['actionTags']:
         $title = $lang['manageTags'];
         break;
+      case $def['actionInfo']:
+        $title = $lang['manageInformation'];
+        break;
       default:
         $title = $lang['admin_title'];
         break;

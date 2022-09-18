@@ -16,12 +16,7 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
     } else {
         $data['active'] = 0;
     }
-    if (isset($_POST['showHide'])) {
-        $data['showHide'] = 1;
-    } else {
-        $data['showHide'] = 0;
-    }
-
+    
     $array_ext_image = array(".png", ".jpg", "jpeg", ".gif", ".bmp", ".PNG", ".JPG", "JPEG", ".GIF", ".BMP", "webp");
 
     $image = $_FILES['imageCate']['name'];

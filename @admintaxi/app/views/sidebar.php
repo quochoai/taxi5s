@@ -29,6 +29,12 @@
               <p><?php echo $lang['manageTags'] ?></p>
             </a>
           </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionInfo']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionInfo'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionInfo']) echo ' active' ?>">
+              <i class="fas fa-info nav-icon"></i>
+              <p><?php echo $lang['manageInformation'] ?></p>
+            </a>
+          </li>
           <!--
           <li class="nav-item has-treeview<?php if (in_array($pqh[0], $array_openaccount)) echo ' menu-open'; ?>">
             <a href="javascript:void(0);" class="nav-link">

@@ -11,6 +11,8 @@
   define("_processCateNews", _process.'categoriesNews/');
   define("_processLogin", _process.'login/');
   define("_processTag", _process.'tags/');
+  define("_processInfo", _process.'information/');
+  define("_processAdmin", _process.'admins/');
   define("_views", _app."views/");
   define("_viewsRequire", 'app/views/');
   define("_viewNews", _views.'news/');
@@ -20,6 +22,10 @@
   define("_viewLogin", _viewsRequire."login/");
   define("_viewRequireTags", _viewsRequire.'tags/');
   define("_viewTags", _views.'tags/');
+  define("_viewRequireInfo", _viewsRequire.'information/');
+  define("_viewInfo", _views.'information/');
+  define("_viewRequireAdmin", _viewsRequire.'admins/');
+  define("_viewAdmin", _views.'admins/');
   define("_viewController", 'app/controllers/');
   define('_imgUpload', _url.'imgUpload/');
   define('_ImgUploadRealPath', substr(_dir_root_, 0, -10)."imgUpload/");
@@ -35,6 +41,8 @@
     'actionNews' => 'news',
     'actionCategoriesNews' => 'categories-news',
     'actionTags' => 'tags',
+    'actionInfo' => 'information',
+    'actionChangePassword' => 'change-password',
     // news category
     'listCateNews' => _viewRequireCateNews.'list.php',
     "listDataCateNews" => _viewRequireCateNews.'data/',
@@ -101,6 +109,40 @@
     "tagDeleteProcess" => _processTag.'delete/',
     // tag active
     "tagActiveProcess" => _processTag.'active/',
+
+    // information list
+    "listInfo" => _viewRequireInfo.'list.php',
+    "listDataInfo" => _viewInfo.'data/',
+    "listDataInfoJs" => _viewInfo.'data/data.js',
+    // information add
+    "infoAdd" => _viewInfo.'add/',
+    "infoAddProcess" => _processInfo.'add/',
+    // information update
+    "infoUpdate" => _viewInfo.'update/',
+    'infoUpdateProcess' => _processInfo.'update/',
+    // information active
+    "infoActiveProcess" => _processInfo.'active/',
+
+    // admin list
+    "listAdmins" => _viewRequireAdmin.'list.php',
+    "listDataAdmins" => _viewAdmin.'data/',
+    "listDataAdminsJs" => _viewAdmin.'data/data.js',
+    "listAdminsDeleted" => _viewRequireAdmin.'listDeleted.php',
+    "listDataAdminsDeleted" => _viewAdmin.'dataDeleted.php',
+    "listDataAdminsDeletedJs" => _viewAdmin.'dataDeleted.js',
+    // admin add
+    "adminAdd" => _viewAdmin.'add/',
+    "adminAddProcess" => _processAdmin.'add/',
+    // admin update
+    "adminUpdate" => _viewAdmin.'update/',
+    'adminUpdateProcess' => _processAdmin.'update/',
+    // admin delete
+    "adminDeleteProcess" => _processAdmin.'delete/',
+    // tag active
+    "adminActiveProcess" => _processAdmin.'active/',
+    // admin change password
+    "adminChangePassword" => _viewAdmin.'changePassword/',
+    'adminUpdateProcess' => _processAdmin.'changePassword/',
 
     // theme
     "themeDist" => _theme.'dist/',

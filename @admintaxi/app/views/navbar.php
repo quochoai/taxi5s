@@ -8,6 +8,9 @@
   <ul class="navbar-nav ml-auto">
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#"><i class="fas fa-user-cog"></i> <?php echo $fullnameAdmin ?></a>
+      <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <a class="dropdown-item changePassword cursorPointer" rel="<?php _e($profileId) ?>"><i class="far fa-unlock-alt"></i> <?php echo $lang['changePassword'] ?></a>
+      </div>
       <!--
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="<?php echo $def['link_update_profile'] . '/' . $id_profile ?>" class="dropdown-item"><i class="fas fa-edit"></i> <?php echo $lang['update_information'] ?></a>

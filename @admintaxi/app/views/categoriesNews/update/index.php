@@ -24,7 +24,6 @@
   }
   $active = $cateNews['active'];
   $sortOrder = $cateNews['sortOrder'];
-  $showHide = $cateNews['showHide'];
   $titleSeo = $cateNews['titleSeo'];
   $descriptionSeo = $cateNews['descriptionSeo'];
   $keywordSeo = $cateNews['keywordSeo'];  
@@ -84,12 +83,6 @@
             <div class="form-group">
               <label class="col-form-label" for="active"><?php echo $lang['activeForm'] ?></label><br />
               <input type="checkbox" name="active" id="active_e"<?php echo ($active == 1) ? ' checked' : '' ?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label class="col-form-label" for="showHide"><?php echo $lang['showHideForm'] ?></label><br />
-              <input type="checkbox" name="showHide" id="showHide_e"<?php echo ($showHide == 1) ? ' checked' : '' ?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
             </div>
           </div>
           <div class="col-md-12 card card-success">

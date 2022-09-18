@@ -13,6 +13,9 @@
       case $def['actionTags']:
         require_once $def['listTags'];
         break;
+        case $def['actionInfo']:
+          require_once $def['listInfo'];
+          break;
       default:
         require_once $def['dashboard'];
         break;

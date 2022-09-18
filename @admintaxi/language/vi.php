@@ -39,6 +39,12 @@ $lang = [
   'titleTag' => 'Tên tag',
   'chooseTag' => 'Chọn tag',
 
+  // information
+  'manageInformation' => 'Quản lý trang thông tin',
+  'addInfoText' => 'Thêm trang thông tin mới',
+  'updateInfoText' => 'Cập nhật trang thông tin',
+  'titleInfo' => 'Tiêu đề trang thông tin',
+
   // general
   'this' => 'này',
   'no.' => 'STT',
@@ -92,4 +98,7 @@ $lang = [
   'contentArticle' => 'Nội dung',
   'numberViews' => 'Lượt xem',
   'tags' => 'Tags',
+  'reload' => 'Tải lại trang',
+  'infoText' => 'Trang thông tin',
+  'changePassword' => 'Thay đổi mật khẩu',
 ];
