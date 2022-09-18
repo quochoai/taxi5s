@@ -71,7 +71,8 @@ jQuery(document).ready(function($) {
   });
   $('#btnReset').click(function(){
 		$(table_id).DataTable().state.clear();
-		window.location.reload();
+		$(table_id).DataTable().destroy();
+		fill_datatable('');
   });
 	let multi_id = [];
 	$('#categories tbody').on('click', 'tr', function() {

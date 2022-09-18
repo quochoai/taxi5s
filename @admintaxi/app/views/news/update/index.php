@@ -146,19 +146,21 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['tags'] ?></label>
-              <select class="form-control select2 select2-success" data-dropdown-css-class="select2-success" style="width: 100%;" name="tags[]" id="tags_e" multiple data-placeholder="<?php echo $lang['chooseTag'] ?>">
-              <?php
-                $tableTags = $prefixTable.$def['tableTags'];
-                $tags = $h->getAll($tableTags, "deleted_at is null and active = 1", "sortOrder asc, id asc");                  
-                foreach ($tags as $tag) {
-                  if (in_array($tag['id'], $tagArray))
-                    $selected = ' selected';
-                  else
-                    $selected = '';
-                  echo '<option value="'.$tag['id'].'"'.$selected.'>'.$tag['titleTag'].'</option>';
-                }
-              ?>
-              </select>
+              <div class="select2-success">
+                <select class="form-control select2 select2-success" data-dropdown-css-class="select2-success" style="width: 100%;" name="tags[]" id="tags_e" multiple data-placeholder="<?php echo $lang['chooseTag'] ?>">
+                <?php
+                  $tableTags = $prefixTable.$def['tableTags'];
+                  $tags = $h->getAll($tableTags, "deleted_at is null and active = 1", "id asc");                  
+                  foreach ($tags as $tag) {
+                    if (in_array($tag['id'], $tagArray))
+                      $selected = ' selected';
+                    else
+                      $selected = '';
+                    echo '<option value="'.$tag['id'].'"'.$selected.'>'.$tag['titleTag'].'</option>';
+                  }
+                ?>
+                </select>
+              </div>
             </div>
           </div>
           <div class="col-md-12 card card-success">

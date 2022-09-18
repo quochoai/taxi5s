@@ -10,6 +10,7 @@
   define("_processNews", _process.'news/');
   define("_processCateNews", _process.'categoriesNews/');
   define("_processLogin", _process.'login/');
+  define("_processTag", _process.'tags/');
   define("_views", _app."views/");
   define("_viewsRequire", 'app/views/');
   define("_viewNews", _views.'news/');
@@ -17,6 +18,8 @@
   define("_viewCateNews", _views.'categoriesNews/');
   define("_viewRequireCateNews", _viewsRequire.'categoriesNews/');
   define("_viewLogin", _viewsRequire."login/");
+  define("_viewRequireTags", _viewsRequire.'tags/');
+  define("_viewTags", _views.'tags/');
   define("_viewController", 'app/controllers/');
   define('_imgUpload', _url.'imgUpload/');
   define('_ImgUploadRealPath', substr(_dir_root_, 0, -10)."imgUpload/");
@@ -80,6 +83,25 @@
     "newsSortProcess" => _processNews.'sort/',
     // news show/hide
     "newsShowHideProcess" => _processNews.'show/',
+
+    // tags list
+    "listTags" => _viewRequireTags.'list.php',
+    "listDataTags" => _viewTags.'data/',
+    "listDataTagsJs" => _viewTags.'data/data.js',
+    "listTagsDeleted" => _viewRequireTags.'listDeleted.php',
+    "listDataTagsDeleted" => _viewTags.'dataDeleted.php',
+    "listDataTagsDeletedJs" => _viewTags.'dataDeleted.js',
+    // tag add
+    "tagAdd" => _viewTags.'add/',
+    "tagAddProcess" => _processTag.'add/',
+    // tag update
+    "tagUpdate" => _viewTags.'update/',
+    'tagUpdateProcess' => _processTag.'update/',
+    // tag delete
+    "tagDeleteProcess" => _processTag.'delete/',
+    // tag active
+    "tagActiveProcess" => _processTag.'active/',
+
     // theme
     "themeDist" => _theme.'dist/',
     "themeJs" => _theme.'js/',

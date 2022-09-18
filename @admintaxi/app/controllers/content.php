@@ -10,5 +10,11 @@
       case $def['actionCategoriesNews']:
         require_once $def['listCateNews'];
         break;
+      case $def['actionTags']:
+        require_once $def['listTags'];
+        break;
+      default:
+        require_once $def['dashboard'];
+        break;
     }
   }
