@@ -1,14 +1,16 @@
 <?php
-  define("_url", "https://taxi3s.com/");
+  define("_url", "https://localhost/taxi5s/");
   define("_assets", _url.'assets/');
   define("_theme", _assets."themes/");
   define("_tinymce", _url."tinymce/");
   define("_filemanager", _url.'filemanager/');
-  define("_urladmin", "https://taxi3s.com/@admintaxi/");
+  define("_urladmin", "https://localhost/taxi5s/@admintaxi/");
   define("_app", _urladmin.'app/');
   define("_process", _app."process/");
   define("_processNews", _process.'news/');
   define("_processCateNews", _process.'categoriesNews/');
+  define("_processOrder", _process.'orders/');
+  define("_processCateOrder", _process.'categoriesOrders/');
   define("_processLogin", _process.'login/');
   define("_processTag", _process.'tags/');
   define("_processInfo", _process.'information/');
@@ -19,6 +21,10 @@
   define("_viewRequireNews", _viewsRequire."news/");
   define("_viewCateNews", _views.'categoriesNews/');
   define("_viewRequireCateNews", _viewsRequire.'categoriesNews/');
+  define("_viewCateOrders", _views.'categoriesOrders/');
+  define("_viewRequireCateOrders", _viewsRequire.'categoriesOrders/');
+  define("_viewOrders", _views.'orders/');
+  define("_viewRequireOrders", _viewsRequire."orders/");
   define("_viewLogin", _viewsRequire."login/");
   define("_viewRequireTags", _viewsRequire.'tags/');
   define("_viewTags", _views.'tags/');
@@ -40,6 +46,8 @@
     // action
     'actionNews' => 'news',
     'actionCategoriesNews' => 'categories-news',
+    'actionOrder' => 'orders',
+    'actionCategoriesOrder' => 'categories-orders',
     'actionTags' => 'tags',
     'actionInfo' => 'information',
     'actionChangePassword' => 'change-password',
@@ -64,8 +72,6 @@
     "cateNewsActiveProcess" => _processCateNews.'active/',
     // news category sort
     "cateNewsSortProcess" => _processCateNews.'sort/',
-    // news category show hide
-    "cateNewsShowHideProcess" => _processCateNews.'show/',
     // news list
     "listNews" => _viewRequireNews.'list.php',
     "listDataNews" => _viewNews.'data/',
@@ -91,6 +97,49 @@
     "newsSortProcess" => _processNews.'sort/',
     // news show/hide
     "newsShowHideProcess" => _processNews.'show/',
+
+    // orders category
+    'listCateOrders' => _viewRequireCateOrders.'list.php',
+    "listDataCateOrder" => _viewRequireCateOrders.'data/',
+    "listDataCateOrderJs" => _viewRequireCateOrders.'data/data.js',
+    "listCateOrderDeleted" => _viewRequireCateOrders.'listDeleted.php',
+    "listDataCateOrderDeleted" => _viewRequireCateOrders.'dataDeleted/',
+    "listDataCateOrderDeletedJs" => _viewRequireCateOrders.'dataDeleted/dataDeleted.js',
+    'imgUploadCateOrder' => _imgUpload.'cateOrders/',
+    'imgUploadCateOrderRealPath' => _ImgUploadRealPath.'cateOrders/',
+    // orders category add
+    "cateOrderAdd" => _viewCateOrders.'add/',
+    "cateOrderAddProcess" => _processCateOrder.'add/',
+    // order category update
+    "cateOrderUpdate" => _viewCateOrders.'update/',
+    'cateOrderUpdateProcess' => _processCateOrder.'update/',
+    // order category delete
+    "cateOrderDeleteProcess" => _processCateOrder.'delete/',
+    // order category active
+    "cateOrderActiveProcess" => _processCateOrder.'active/',
+    // news category sort
+    "cateOrderSortProcess" => _processCateOrder.'sort/',
+    // order list
+    "listOrder" => _viewRequireOrders.'list.php',
+    "listDataOrder" => _viewOrders.'data/',
+    "listDataOrderJs" => _viewOrders.'data/data.js',
+    "listOrderDeleted" => _viewRequireOrders.'listDeleted.php',
+    "listDataOrderDeleted" => _viewOrders.'dataDeleted.php',
+    "listDataOrderDeletedJs" => _viewOrders.'dataDeleted.js',
+    'imgUploadOrder' => _imgUpload.'orders/',
+    'imgUploadOrderRealPath' => _ImgUploadRealPath.'orders/',
+    // order add
+    "orderAdd" => _viewOrders.'add/',
+    "orderAddProcess" => _processOrder.'add/',
+    // order update
+    "orderUpdate" => _viewOrders.'update/',
+    'orderUpdateProcess' => _processOrder.'update/',
+    // order delete
+    "orderDeleteProcess" => _processOrder.'delete/',
+    // order active
+    "orderActiveProcess" => _processOrder.'active/',
+    // order sort
+    "orderSortProcess" => _processOrder.'sort/',
 
     // tags list
     "listTags" => _viewRequireTags.'list.php',
@@ -158,12 +207,14 @@
     "tableAdminRoles" => "admin_roles",
     "tableCategories" => "categories",
     "tableCategoriesNews" => "categories_news",
+    "tableCategoriesOrders" => 'categories_orders',
     'tableConfigurations' => 'configurations',
     'tableDistricts' => 'districts',
     'tableFunctionRoles' => 'function_roles',
     'tableHtmls' => 'htmls',
     'tableInformations' => 'informations',
     'tableNews' => 'news',
+    "tableOrders" => "orders",
     'tableNewsTags' => 'news_tags',
     'tableProvinces' => 'provinces',
     'tableTags' => 'tags',
