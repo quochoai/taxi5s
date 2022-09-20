@@ -31,6 +31,17 @@ $lang = [
   'addNewsText' => 'Thêm tin tức mới',
   'updateNewsText' => 'Cập nhật tin tức',
   'postDate' => 'Ngày đăng',
+  // cate orders
+  'manageCategoryOrders' => 'Quản lý danh mục đặt xe',
+  'cateOrderText' => 'Danh mục đặt xe',
+  'addCateOrderText' => 'Thêm danh mục đặt xe mới',
+  'updateCateOrderText' => 'Cập nhật danh mục đặt xe',
+  // orders
+  'manageOrders' => 'Quản lý tin tức đặt xe',
+  'orderText' => 'tin tức đặt xe',
+  'addOrderText' => 'Thêm tin tức đặt xe mới',
+  'updateOrderText' => 'Cập nhật tin tức đặt xe',
+
   // tags
   'manageTags' => 'Quản lý Tags',
   'tagText' => 'tag',

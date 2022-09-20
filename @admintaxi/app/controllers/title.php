@@ -4,6 +4,12 @@
   else {
     $action = trim($_REQUEST['action']);
     switch ($action) {
+      case $def['actionOrder']:
+        $title = $lang['manageOrders'];
+        break;
+      case $def['actionCategoriesOrder']:
+        $title = $lang['manageCategoryOrders'];
+        break;
       case $def['actionNews']:
         $title = $lang['manageNews'];
         break;

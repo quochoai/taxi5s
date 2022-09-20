@@ -23,6 +23,18 @@
               <p><?php echo $lang['manageNews'] ?></p>
             </a>
           </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionCategoriesOrder']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionCategoriesOrder'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionCategoriesOrder']) echo ' active' ?>">
+              <i class="fas fa-newspaper nav-icon"></i>
+              <p><?php echo $lang['manageCategoryOrders'] ?></p>
+            </a>
+          </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionOrder']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionOrder'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionOrder']) echo ' active' ?>">
+              <i class="fas fa-newspaper nav-icon"></i>
+              <p><?php echo $lang['manageOrders'] ?></p>
+            </a>
+          </li>
           <li class="nav-item<?php if ($pqh[0] == $def['actionTags']) echo ' menu-open'; ?>">
             <a href="?action=<?php echo $def['actionTags'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionTags']) echo ' active' ?>">
               <i class="fas fa-tags nav-icon"></i>
