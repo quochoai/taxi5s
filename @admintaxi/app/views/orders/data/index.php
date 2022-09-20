@@ -21,7 +21,7 @@
 	} else {
 		$whh = "";
 		if ($search_value != '')
-			$whh .= " and titleNews like '%$search_value%'";
+			$whh .= " and titleOrder like '%$search_value%'";
 		if ($cateID != 0)
 			$whh .= " and cateID = $cateID";
 		$wh = "deleted_at is null".$whh;
@@ -31,8 +31,8 @@
 			$lim = "";
 	}
 	
-	$table = $prefixTable.$def['tableNews'];
-	$tableCateNews = $prefixTable.$def['tableCategoriesNews'];
+	$table = $prefixTable.$def['tableOrders'];
+	$tableCateOrders = $prefixTable.$def['tableCategoriesOrders'];
 
 	$s = $h->query("select * from $table where $wh order by created_at desc, id desc");
 	$no = 1;
@@ -40,45 +40,45 @@
 		if ($totalData > 0) {
 		$totalFiltered = $totalData;
 		$ss = $h->query("select * from $table where $wh order by created_at desc, id desc");
-		while ($news = $h->fetch_array($ss)) {
-			if ($news['active'] == 1) {
-				$textActive = $lang['deactiveForm'].' '.$lang['newsText'].' '.$lang['this'];
+		while ($order = $h->fetch_array($ss)) {
+			if ($order['active'] == 1) {
+				$textActive = $lang['deactiveForm'].' '.$lang['orderText'].' '.$lang['this'];
 				$activeIcon = '<i class="fas fa-check-circle"></i>';
 				$classActive = ' text-success';
 				$act = 0;
 			} else {
-				$textActive = $lang['activeForm'].' '.$lang['newsText'].' '.$lang['this'];
+				$textActive = $lang['activeForm'].' '.$lang['orderText'].' '.$lang['this'];
 				$activeIcon = '<i class="far fa-circle"></i>';
 				$classActive = ' text-danger';
 				$act = 1;
 			}
-			$active = '<a class="text-center'.$classActive.' active cursorPointer" rel="'.$news['id'].'" title="'.$textActive.'" data-active="'.$act.'"><h4>'.$activeIcon.'</h4></a>';
-			$newsCate = $h->getById($tableCateNews, $news['cateID']);
-			$titleCate = $newsCate['titleCate'];
-			$titleNews = $news['titleNews'];
-			$imgNews = $news['imageNews'];
-			if (!is_null($imgNews) && $imgNews != '' && file_exists($def['imgUploadNewsRealPath'].$imgNews))
-				$img = '<img src="'.$def['imgUploadNews'].$imgNews.'" width="80" alt="'.$titleNews.'" />';
+			$active = '<a class="text-center'.$classActive.' active cursorPointer" rel="'.$order['id'].'" title="'.$textActive.'" data-active="'.$act.'"><h4>'.$activeIcon.'</h4></a>';
+			$orderCate = $h->getById($tableCateOrders, $order['cateID']);
+			$titleCate = $orderCate['titleCate'];
+			$titleOrder = $order['titleOrder'];
+			$imgOrder = $order['imageOrder'];
+			if (!is_null($imgOrder) && $imgOrder != '' && file_exists($def['imgUploadOrderRealPath'].$imgOrder))
+				$img = '<img src="'.$def['imgUploadOrder'].$imgOrder.'" width="80" alt="'.$titleOrder.'" />';
 			else
 				$img = '';			
 			
-			$sortOrder = '<input type="number" class="sortUpdate text-center" id="'.$news['id'].'" value="'.$news['sortOrder'].'" style="width: 75px" />';
+			$sortOrder = '<input type="number" class="sortUpdate text-center" id="'.$order['id'].'" value="'.$order['sortOrder'].'" style="width: 75px" />';
 
-			$actions = '<a class="btn btn-success btn-sm update cursorPointer" data-id="'.$news['id'].'"  title="'.$lang['updateText'].' '.$lang['newsText'].' '.$lang['this'].'"><i class="fas fa-edit"></i></a> | <a class="btn btn-danger btn-sm delete cursorPointer" data-id="'.$news['id'].'" title="'.$lang['deleteText'].' '.$lang['newsText'].' '.$lang['this'].'"><i class="fas fa-trash-alt"></i></a></a>';
+			$actions = '<a class="btn btn-success btn-sm update cursorPointer" data-id="'.$order['id'].'"  title="'.$lang['updateText'].' '.$lang['orderText'].' '.$lang['this'].'"><i class="fas fa-edit"></i></a> | <a class="btn btn-danger btn-sm delete cursorPointer" data-id="'.$order['id'].'" title="'.$lang['deleteText'].' '.$lang['orderText'].' '.$lang['this'].'"><i class="fas fa-trash-alt"></i></a></a>';
 
-			$pd = $news['postDate'];
+			$pd = $order['postDate'];
 			if (!is_null($pd) && $pd != '')
 				$postDate = date("d/m/Y H:i:s", strtotime($pd));
 			else
 				$postDate = '';
 
 			$a[] = array(
-				"DT_RowId" => $news['id'],
+				"DT_RowId" => $order['id'],
 				"DT_RowClass" => "choose_this",
 				"no" => $no,
-				"titleNews" => $titleNews,  
+				"titleOrder" => $titleOrder,  
 				"titleCate" => $titleCate,
-				"imageNews" => $img, 
+				"imageOrder" => $img, 
 				"postDate" => $postDate,
 				"active" => $active, 
 				"sortOrder" => $sortOrder, 

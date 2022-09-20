@@ -10,7 +10,7 @@
 			$user_id = $muser[1];
 		}
     $ids = $_POST['id'];
-    $table = $prefixTable.$def['tableNews'];
+    $table = $prefixTable.$def['tableOrders'];
     if (is_array($ids)) {
       foreach ($ids as $id) {
         $result = $h->softDeleteBy($table, " where id = $id", $user_id);

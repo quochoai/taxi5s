@@ -1,7 +1,7 @@
 <?php
   require_once "../../../../library.php";
-  $tableCateNews = $prefixTable.$def['tableCategoriesNews'];
-  $table = $prefixTable.$def['tableNews'];
+  $tableCateOrder = $prefixTable.$def['tableCategoriesOrders'];
+  $table = $prefixTable.$def['tableOrders'];
   $max = $h->getMax($table, 'sortOrder', 'maxSortOrder');
   if ($max == 0)
     $sortOrder = 1;
@@ -14,19 +14,19 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header bg-success">
-      <h5 class="modal-title text-uppercase"><?php echo $lang['addNewsText'] ?></h5>
+      <h5 class="modal-title text-uppercase"><?php echo $lang['addOrderText'] ?></h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" class="text-white">&times;</span>
       </button>
     </div>
     <!--  -->
-    <form method="post" action="<?php echo $def['newsAddProcess'] ?>" id="form_add" enctype="multipart/form-data">
+    <form method="post" action="<?php echo $def['orderAddProcess'] ?>" id="form_add" enctype="multipart/form-data">
       <div class="modal-body container-fluid">
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['titleForm'].$lngDefaultText ?></label>
-              <input type="text" class="form-control" name="data[titleNews<?php echo $lngDefault ?>]" id="titleNews<?php echo $lngDefault ?>" />
+              <input type="text" class="form-control" name="data[titleOrder<?php echo $lngDefault ?>]" id="titleOrder<?php echo $lngDefault ?>" />
             </div>
           </div>
           <div class="col-md-6">
@@ -34,8 +34,8 @@
               <label class="col-form-label" for="name"><?php echo $lang['cate'] ?></label>
               <select class="form-control select2 select2-success" data-dropdown-css-class="select2-success" style="width: 100%;" name="data[cateID]" id="cateID">
               <?php
-                  $cateNews = $h->getAll($tableCateNews, "deleted_at is null and active = 1", "sortOrder asc, id asc");                  
-                  foreach ($cateNews as $cate) {
+                  $cateOrders = $h->getAll($tableCateOrder, "deleted_at is null and active = 1", "sortOrder asc, id asc");                  
+                  foreach ($cateOrders as $cate) {
                       echo '<option value="'.$cate['id'].'">'.$cate['titleCate'].'</option>';
                   }
               ?>
@@ -44,11 +44,11 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label class="col-form-label" for="imageNews"><?php echo $lang['imageForm'] ?></label>
+              <label class="col-form-label" for="imageOrder"><?php echo $lang['imageForm'] ?></label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="imageNews" name="imageNews">
-                  <label class="custom-file-label" for="imageNews"></label>
+                  <input type="file" class="custom-file-input" id="imageOrder" name="imageOrder">
+                  <label class="custom-file-label" for="imageOrder"></label>
                 </div>
               </div>
               <small class="text-danger"><i><?php echo $lang['sizeImageForm'] ?></i></small>
@@ -71,13 +71,13 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['shortContent'].$lngDefaultText ?></label>
-              <textarea type="text" class="form-control" name="data[shortContentNews<?php echo $lngDefault ?>]" id="shortContentNews<?php echo $lngDefault ?>"></textarea>
+              <textarea type="text" class="form-control" name="data[shortContentOrder<?php echo $lngDefault ?>]" id="shortContentOrder<?php echo $lngDefault ?>"></textarea>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['contentArticle'].$lngDefaultText ?></label>
-              <textarea type="text" class="form-control" name="data[contentNews<?php echo $lngDefault ?>]" id="contentNews<?php echo $lngDefault ?>"></textarea>
+              <textarea type="text" class="form-control" name="data[contentOrder<?php echo $lngDefault ?>]" id="contentOrder<?php echo $lngDefault ?>"></textarea>
             </div>
           </div>
           <div class="col-md-4">
@@ -146,7 +146,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="reset" class="btn btn-default"><?php echo $lang['reset'] ?> <i class="fas fa-undo"></i></button>
-        <button type="submit" id="addNews" class="btn btn-success"><?php echo $lang['save'] ?> <i class="fas fa-save"></i></button>
+        <button type="submit" id="addOrder" class="btn btn-success"><?php echo $lang['save'] ?> <i class="fas fa-save"></i></button>
       </div>
     </form>
   </div>
@@ -178,7 +178,7 @@
     });
   });
   // show image before upload
-  showImageBeforeUpload('#imageNews', '#display-image', 120); 
+  showImageBeforeUpload('#imageOrder', '#display-image', 120); 
   showImageBeforeUpload('#imageShareFb', '#display-image-sharefb', 120); 
   $("input[data-bootstrap-switch]").each(function() {
     $(this).bootstrapSwitch('state', $(this).prop('checked'));
@@ -187,7 +187,7 @@
 <script type="text/javascript" src="<?php echo _tinymce ?>tinymce.min.js"></script>
 <script type="text/javascript">
   tinymce.init({
-    selector: "textarea#contentNews<?php echo $lngDefault ?>, textarea#contentNews<?php echo $lngDefault ?>_e",
+    selector: "textarea#contentOrder<?php echo $lngDefault ?>",
     theme: "modern",
     width: 750,
     height: 300,

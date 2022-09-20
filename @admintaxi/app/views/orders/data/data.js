@@ -31,7 +31,7 @@ jQuery(document).ready(function($) {
 			processing: true,
 			serverSide: true,
 			ajax: {
-				"url": backend_news_list,
+				"url": backend_orders_list,
 				"dataType": "json",
 				"type": "GET",
 				"data":{search_value: search_value, cateID: cateID}
@@ -45,9 +45,9 @@ jQuery(document).ready(function($) {
 			},
 			columns: [
 				{ data: 'no', name: 'no',className: "text-center text-nowrap small_text" },
-				{ data: 'titleNews', name: 'titleNews', className: "text-left text-nowrap small_text" },
+				{ data: 'titleOrder', name: 'titleOrder', className: "text-left text-nowrap small_text" },
 				{ data: 'titleCate', name: 'titleCate', className: "text-left text-nowrap small_text" },
-				{ data: 'imageNews', name: 'imageNews',className: "text-center text-nowrap small_text" },
+				{ data: 'imageOrder', name: 'imageOrder',className: "text-center text-nowrap small_text" },
 				{ data: 'postDate', name: 'postDate',className: "text-center text-nowrap small_text" },
 				{ data: 'sortOrder', name: 'sortOrder',className: "text-center text-nowrap small_text" },
 				{ data: 'active', name: 'active', className: "text-center text-nowrap small_text" },
@@ -98,9 +98,9 @@ jQuery(document).ready(function($) {
 		else {
 			let conf = "";
 			if (multi_id.length == 1)
-				conf = deleteConfirmText + newsText + ' ' + thisText + ' ?';
+				conf = deleteConfirmText + orderText + ' ' + thisText + ' ?';
 			else
-				conf = deleteMultiConfirmText + newsText + ' ' + thisText + ' ?';
+				conf = deleteMultiConfirmText + orderText + ' ' + thisText + ' ?';
 			if (confirm(conf)) {
 				$('#delete_multi').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 				$.post(processDelete, {id: id}, function(data) {
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
 		let id = $(this).attr('data-id');
 		let search_value = $.trim($('#search_value').val());
 		let cateID = $('#filterCateID').val();
-		let conf = deleteConfirmText + newsText + ' ' + thisText + ' ?';
+		let conf = deleteConfirmText + orderText + ' ' + thisText + ' ?';
 		if (confirm(conf)) {
 			$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 			$.post(processDelete, {id: id}, function(data) {
@@ -134,19 +134,6 @@ jQuery(document).ready(function($) {
 		
 		$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 		$.post(processActive, {id: id, active: act}, function(data) {
-			$(table_id).DataTable().destroy();
-			fill_datatable(search_value, cateID);
-		});
-	});
-	// show / hide
-	$(document).on('click', '.showHideUpdate', function() {
-		let id = $(this).attr('rel');
-		let hs = $(this).attr('data-hs');
-		let search_value = $.trim($('#search_value').val());
-		let cateID = $('#filterCateID').val();
-		
-		$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-		$.post(processShowHide, {id: id, showHide: hs}, function(data) {
 			$(table_id).DataTable().destroy();
 			fill_datatable(search_value, cateID);
 		});
@@ -171,25 +158,25 @@ jQuery(document).ready(function($) {
       modalAdd.modal('show');
     });    
   });
-	let addNews = '#addNews';
-	let btnAddNews = $(addNews);
-	$(document).on('click', addNews, function() {
-		let titleCateElement = $('#titleNews'+lngDefault);		
-		let titleCate = $.trim(titleCateElement.val());
-		if (titleCate == '') {
-			toastr.error(notFill + 'tiêu đề ' + newsText);
-			titleCateElement.addClass('is-invalid');
-			titleCateElement.focus();
+	let addOrder = '#addOrder';
+	let btnAddOrder = $(addOrder);
+	$(document).on('click', addOrder, function() {
+		let titleOrderElement = $('#titleOrder'+lngDefault);		
+		let titleOrder = $.trim(titleOrderElement.val());
+		if (titleOrder == '') {
+			toastr.error(notFill + 'tiêu đề ' + orderText);
+			titleOrderElement.addClass('is-invalid');
+			titleOrderElement.focus();
 			return false;
 		} else {
-			titleCateElement.removeClass('is-invalid');
-			titleCateElement.addClass('is-valid');
+			titleOrderElement.removeClass('is-invalid');
+			titleOrderElement.addClass('is-valid');
 		}
 		let formAdd = $('#form_add');
 		formAdd.ajaxForm({
 			beforeSend: function() {
-				btnAddNews.attr("disabled",true);
-				btnAddNews.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnAddOrder.attr("disabled",true);
+				btnAddOrder.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -198,8 +185,8 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-				btnAddNews.html(saveText + ' <i class="fas fa-save">');
-				btnAddNews.removeAttr('disabled');
+				btnAddOrder.html(saveText + ' <i class="fas fa-save">');
+				btnAddOrder.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){
@@ -233,25 +220,25 @@ jQuery(document).ready(function($) {
       modalUpdate.modal('show');
     });    
   });
-	let updateNews = '#updateNews';
-	let btnUpdateNews = $(updateNews);
-	$(document).on('click', updateNews, function() {
-		let titleCateElement_e = $('#titleNews'+lngDefault+'_e');		
-		let titleCate_e = $.trim(titleCateElement_e.val());
-		if (titleCate_e == '') {
-			toastr.error(notFill + 'tiêu đề ' + newsText);
-			titleCateElement_e.addClass('is-invalid');
-			titleCateElement_e.focus();
+	let updateOrder = '#updateOrder';
+	let btnUpdateOrder = $(updateOrder);
+	$(document).on('click', updateOrder, function() {
+		let titleOrderElement_e = $('#titleOrder'+lngDefault+'_e');		
+		let titleOrder_e = $.trim(titleOrderElement_e.val());
+		if (titleOrder_e == '') {
+			toastr.error(notFill + 'tiêu đề ' + orderText);
+			titleOrderElement_e.addClass('is-invalid');
+			titleOrderElement_e.focus();
 			return false;
 		} else {
-			titleCateElement_e.removeClass('is-invalid');
-			titleCateElement_e.addClass('is-valid');
+			titleOrderElement_e.removeClass('is-invalid');
+			titleOrderElement_e.addClass('is-valid');
 		}
 		let formUpdate = $('#form_update');
 		formUpdate.ajaxForm({
 			beforeSend: function() {
-				btnUpdateNews.attr("disabled",true);
-				btnUpdateNews.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnUpdateOrder.attr("disabled",true);
+				btnUpdateOrder.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -260,8 +247,8 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-			 	btnUpdateNews.html(updateText + ' <i class="fas fa-edit">');
-				btnUpdateNews.removeAttr('disabled');
+			 	btnUpdateOrder.html(updateText + ' <i class="fas fa-edit">');
+				btnUpdateOrder.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){

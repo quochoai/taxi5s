@@ -9,7 +9,7 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
         $muser = explode("cookie", $islogin[0]);
         $user_id = $muser[1];
     }
-    $id = $_POST['idNews'];
+    $id = $_POST['idOrder'];
     $data = $_POST['data'];
     if (isset($_POST['active'])) {
         $data['active'] = 1;
@@ -24,13 +24,13 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 
     $array_ext_image = array(".png", ".jpg", "jpeg", ".gif", ".bmp", ".PNG", ".JPG", "JPEG", ".GIF", ".BMP", "webp");
 
-    $image = $_FILES['imageNews']['name'];
+    $image = $_FILES['imageOrder']['name'];
 		if ($image != '') {
 			$ext = substr($image, -4);
 			$filename = substr($image, 0, -4);
 			$imgUpload = '';
 			if (in_array($ext, $array_ext_image)) {
-				$path = $def['imgUploadNewsRealPath'];
+				$path = $def['imgUploadOrderRealPath'];
 				$width = 500;
 				$height = 333;
 				if ($ext == 'jpeg' || $ext == 'JPEG' || $ext == 'webp') {
@@ -38,9 +38,9 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 				} else {
 						$extGet = $ext;
 				}
-				$imgUpload = resizeImage2($width, $height, stringImage($image), $path, $_FILES['imageNews']['tmp_name'], stringImage($filename).'-'.'news'.time().$extGet);
+				$imgUpload = resizeImage2($width, $height, stringImage($image), $path, $_FILES['imageOrder']['tmp_name'], stringImage($filename).'-'.'order'.time().$extGet);
 			}
-			$data['imageNews'] = $imgUpload;
+			$data['imageOrder'] = $imgUpload;
 		}
 
 		$imageShareFb = $_FILES['imageShareFb']['name'];
@@ -49,7 +49,7 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 			$filenameShareFb = substr($imageShareFb, 0, -4);
 			$imgUploadShareFb = '';
 			if (in_array($extShareFb, $array_ext_image)) {
-					$path = $def['imgUploadNewsRealPath'];
+					$path = $def['imgUploadOrderRealPath'];
 					//if (!file_exists($path.stringImage($image))) {
 					$widthFb = 450;
 					$heightFb = 235;
@@ -58,22 +58,11 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 					} else {
 							$extGetFb = $extShareFb;
 					}
-					$imgUploadShareFb = resizeImage2($widthFb, $heightFb, stringImage($imageShareFb), $path, $_FILES['imageShareFb']['tmp_name'], stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb);
+					$imgUploadShareFb = resizeImage2($widthFb, $heightFb, stringImage($imageShareFb), $path, $_FILES['imageShareFb']['tmp_name'], stringImage($filenameShareFb).'-'.'ordernewsShareFB'.time().$extGetFb);
 					//}
 			}
 			$data['imageShareFb'] = $imgUploadShareFb;
 		}
-		/*$tagArray = [];
-		$tableNewsTags = $prefixTable.$def['tableNewsTags'];
-		$checkExistNewsTag = $h->checkExist($tableNewsTags, "deleted_at is null and active = 1 and newsID = $id");
-		if ($checkExistNewsTag) {
-			$tagse = $h->getAll($tableNewsTags, "deleted_at is null and active = 1 and newsID = $id", "sortOrder asc, id asc");
-			foreach ($tagse as $tage) {
-				$tagGet = [$tage['id'], $tage['tagID']];
-				array_push($tagArray, $tagGet);
-			}
-		}
-		$countTagTableNewsTag = count($tagArray);*/
 		$tags = $_POST['tags'];
 		if (count($tags) > 0) {
 			$data['tags'] = implode(",", $tags);
@@ -81,27 +70,9 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 			$data['tags'] = NULL;
 		}
 
-		$table = $prefixTable.$def['tableNews'];
+		$table = $prefixTable.$def['tableOrders'];
 		$result = $h->updateDataBy($data, $table, "where id = $id", $user_id);
 		if ($result) {
-			/*if ($countTagPost > 0 && $countTagPost > $countTagTableNewsTag) {
-				$n = $countTagPost - $countTagTableNewsTag;
-				$tableNewsTags = $prefixTable.$def['tableNewsTags'];
-				for ($i = 0; $i < $countTagTableNewsTag; $i++) {
-					if ($tagArray[$i]['tagID'] != $tags[$i]) {
-						$dataTag['tagID'] = $tags[$i];
-
-					}
-
-				}
-				foreach ($tags as $k => $tag) {
-					$dataTag['newsID'] = $idLast;
-					$dataTag['tagID'] = $tag;
-					$dataTag['sortOrder'] = $k + 1;
-					$dataTag['active'] = 1;
-					$insertTag = $h->insertDataBy($dataTag, $tableNewsTags, $user_id);
-				}
-			}*/
 			echo '1;success';
 		} else
 			echo '2;error';

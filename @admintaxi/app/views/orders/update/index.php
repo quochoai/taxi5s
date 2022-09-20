@@ -1,47 +1,47 @@
 <?php
   require_once "../../../../library.php";
   $id = $_POST['id'];
-  $tableCateNews = $prefixTable.$def['tableCategoriesNews'];
-  $table = $prefixTable.$def['tableNews'];
-  $news = $h->getById($table, $id);
-  $cateID = $news['cateID'];
-  $titleNews = $news['titleNews'.$lngDefault];
-  $imgNews = $news['imageNews'];
+  $tableCateOrder = $prefixTable.$def['tableCategoriesOrders'];
+  $table = $prefixTable.$def['tableOrders'];
+  $order = $h->getById($table, $id);
+  $cateID = $order['cateID'];
+  $titleOrder = $order['titleOrder'.$lngDefault];
+  $imgOrder = $order['imageOrder'];
   
-  if (file_exists($def['imgUploadNewsRealPath'].$imgNews) && !is_null($imgNews) && $imgNews != '') {
-    $imgNewsShow = '<img src="'.$def['imgUploadNews'].$imgNews.'" width="120" height="auto" />';
-    $dImgNews = ' style="display: block"';
+  if (file_exists($def['imgUploadOrderRealPath'].$imgOrder) && !is_null($imgOrder) && $imgOrder != '') {
+    $imgOrderShow = '<img src="'.$def['imgUploadOrder'].$imgOrder.'" width="120" height="auto" />';
+    $dImgOrder = ' style="display: block"';
   } else {
-    $imgNewsShow = '';
-    $dImgNews = '';
+    $imgOrderShow = '';
+    $dImgOrder = '';
   }
     
-  $imgShareFb = $news['imageShareFb'];
-  if (file_exists($def['imgUploadNewsRealPath'].$imgShareFb) && !is_null($imgShareFb) && $imgShareFb != '') {
-    $imgShareFbShow = '<img src="'.$def['imgUploadNews'].$imgShareFb.'" width="120" height="auto" />';
-    $dImgNewsFb = ' style="display: block"';
+  $imgShareFb = $order['imageShareFb'];
+  if (file_exists($def['imgUploadOrderRealPath'].$imgShareFb) && !is_null($imgShareFb) && $imgShareFb != '') {
+    $imgShareFbShow = '<img src="'.$def['imgUploadOrder'].$imgShareFb.'" width="120" height="auto" />';
+    $dImgOrderFb = ' style="display: block"';
   } else {
     $imgShareFbShow = '';
-    $dImgNewsFb = '';
+    $dImgOrderFb = '';
   }
 
-  $active = $news['active'];
-  $sortOrder = $news['sortOrder'];
-  $pd = $news['postDate'];
+  $active = $order['active'];
+  $sortOrder = $order['sortOrder'];
+  $pd = $order['postDate'];
   if ($pd != '' && !is_null($pd))
     $postDate = date("d/m/Y", strtotime($pd));
   else
     $postDate = '';
-  if ($news['tags'] != '' && !is_null($news['tags']))
-    $tagArray = explode(",", $news['tags']);
+  if ($order['tags'] != '' && !is_null($order['tags']))
+    $tagArray = explode(",", $order['tags']);
   else
     $tagArray = [];
   
-  $shortContent = $news['shortContentNews'.$lngDefault];
-  $content = $news['contentNews'.$lngDefault];
-  $titleSeo = $news['titleSeo'.$lngDefault];
-  $descriptionSeo = $news['descriptionSeo'.$lngDefault];
-  $keywordSeo = $news['keywordSeo'.$lngDefault];  
+  $shortContent = $order['shortContentOrder'.$lngDefault];
+  $content = $order['contentOrder'.$lngDefault];
+  $titleSeo = $order['titleSeo'.$lngDefault];
+  $descriptionSeo = $order['descriptionSeo'.$lngDefault];
+  $keywordSeo = $order['keywordSeo'.$lngDefault];  
 ?>
 <!-- select2 -->
 <link rel="stylesheet" href="<?php echo $def['themePlugins']; ?>select2/css/select2.min.css" />
@@ -49,20 +49,20 @@
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header bg-success">
-      <h5 class="modal-title text-uppercase"><?php echo $lang['updateNewsText'] ?></h5>
+      <h5 class="modal-title text-uppercase"><?php echo $lang['updateOrderText'] ?></h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true" class="text-white">&times;</span>
       </button>
     </div>
     <!--  -->
-    <form method="post" action="<?php echo $def['newsUpdateProcess'] ?>" id="form_update" enctype="multipart/form-data">
+    <form method="post" action="<?php echo $def['orderUpdateProcess'] ?>" id="form_update" enctype="multipart/form-data">
       <div class="modal-body container-fluid">
         <div class="row">
-          <input type="hidden" name="idNews" value="<?php _e($id) ?>" />
+          <input type="hidden" name="idOrder" value="<?php _e($id) ?>" />
           <div class="col-md-6">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['titleForm'].$lngDefaultText ?></label>
-              <input type="text" class="form-control" name="data[titleNews<?php echo $lngDefault ?>]" id="titleNews<?php echo $lngDefault ?>_e" value="<?php _e($titleNews) ?>" />
+              <input type="text" class="form-control" name="data[titleOrder<?php echo $lngDefault ?>]" id="titleOrder<?php echo $lngDefault ?>_e" value="<?php _e($titleOrder) ?>" />
             </div>
           </div>
           <div class="col-md-6">
@@ -70,8 +70,8 @@
               <label class="col-form-label" for="name"><?php echo $lang['cate'] ?></label>
               <select class="form-control select2 select2-success" data-dropdown-css-class="select2-success" style="width: 100%;" name="data[cateID]" id="cateID_e">
               <?php
-                  $news = $h->getAll($tableCateNews, "deleted_at is null and active = 1", "sortOrder asc, id asc");                  
-                  foreach ($news as $cate) {
+                  $cateOrder = $h->getAll($tableCateOrder, "deleted_at is null and active = 1", "sortOrder asc, id asc");                  
+                  foreach ($cateOrder as $cate) {
                     if ($cate['id'] == $cateID)
                       $selected = ' selected';
                     else
@@ -84,15 +84,15 @@
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label class="col-form-label" for="imageNews_e"><?php echo $lang['imageForm'] ?></label>
+              <label class="col-form-label" for="imageOrder_e"><?php echo $lang['imageForm'] ?></label>
               <div class="input-group">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="imageNews_e" name="imageNews">
-                  <label class="custom-file-label" for="imageNews_e"></label>
+                  <input type="file" class="custom-file-input" id="imageOrder_e" name="imageOrder">
+                  <label class="custom-file-label" for="imageOrder_e"></label>
                 </div>
               </div>
               <small class="text-danger"><i><?php echo $lang['sizeImageForm'] ?></i></small>
-              <div id="display-image-e"<?php _e($dImgNews) ?>><?php _e($imgNewsShow) ?></div>
+              <div id="display-image-e"<?php _e($dImgOrder) ?>><?php _e($imgOrderShow) ?></div>
             </div>
           </div>
           <div class="col-md-6">
@@ -105,19 +105,19 @@
                 </div>
               </div>
               <small class="text-danger"><i><?php echo $lang['sizeImageShareFb'] ?></i></small>
-              <div id="display-image-sharefb-e"<?php _e($dImgNewsFb) ?>><?php _e($imgShareFbShow) ?></div>
+              <div id="display-image-sharefb-e"<?php _e($dImgOrderFb) ?>><?php _e($imgShareFbShow) ?></div>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['shortContent'].$lngDefaultText ?></label>
-              <textarea type="text" class="form-control" name="data[shortContentNews<?php echo $lngDefault ?>]" id="shortContentNews<?php echo $lngDefault ?>_e"><?php _e($shortContent) ?></textarea>
+              <textarea type="text" class="form-control" name="data[shortContentOrder<?php echo $lngDefault ?>]" id="shortContentOrder<?php echo $lngDefault ?>_e"><?php _e($shortContent) ?></textarea>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['contentArticle'].$lngDefaultText ?></label>
-              <textarea type="text" class="form-control" name="data[contentNews<?php echo $lngDefault ?>]" id="contentNews<?php echo $lngDefault ?>_e"><?php _e($content) ?></textarea>
+              <textarea type="text" class="form-control" name="data[contentOrder<?php echo $lngDefault ?>]" id="contentOrder<?php echo $lngDefault ?>_e"><?php _e($content) ?></textarea>
             </div>
           </div>
           <div class="col-md-4">
@@ -190,7 +190,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="reset" class="btn btn-default"><?php echo $lang['reset'] ?> <i class="fas fa-undo"></i></button>
-        <button type="submit" id="updateNews" class="btn btn-success"><?php echo $lang['save'] ?> <i class="fas fa-save"></i></button>
+        <button type="submit" id="updateOrder" class="btn btn-success"><?php echo $lang['updateText'] ?> <i class="fas fa-save"></i></button>
       </div>
     </form>
   </div>
@@ -222,7 +222,7 @@
     });
   });
   // show image before upload
-  showImageBeforeUpload('#imageNews_e', '#display-image-e', 120); 
+  showImageBeforeUpload('#imageOrder_e', '#display-image-e', 120); 
   showImageBeforeUpload('#imageShareFb_e', '#display-image-sharefb-e', 120); 
   $("input[data-bootstrap-switch]").each(function() {
     $(this).bootstrapSwitch('state', $(this).prop('checked'));
@@ -231,7 +231,7 @@
 <script type="text/javascript" src="<?php echo _tinymce ?>tinymce.min.js"></script>
 <script type="text/javascript">
   tinymce.init({
-    selector: "textarea#contentNews<?php echo $lngDefault ?>_e",
+    selector: "textarea#contentOrder<?php echo $lngDefault ?>_e",
     theme: "modern",
     width: 750,
     height: 300,

@@ -15,11 +15,11 @@
     if (is_array($ids)) {
       foreach ($ids as $id) {
         $result = $h->softDeleteBy($table, " where id = $id", $user_id);
-        $resultNews = $h->softDeleteBy($tableOrder, " where cateID = $id", $user_id);
+        $resultOrder = $h->softDeleteBy($tableOrder, " where cateID = $id", $user_id);
       }
     } else {
       $result = $h->softDeleteBy($table, " where id = $ids", $user_id);
-      $resultNews = $h->softDeleteBy($tableOrder, " where cateID = $ids", $user_id);
+      $resultOrder = $h->softDeleteBy($tableOrder, " where cateID = $ids", $user_id);
     }
   } else
     echo '5;error';

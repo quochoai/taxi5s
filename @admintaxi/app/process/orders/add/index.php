@@ -22,12 +22,12 @@
 		}
 		$array_ext_image = array(".png", ".jpg", "jpeg", ".gif", ".bmp", ".PNG", ".JPG", "JPEG", ".GIF", ".BMP", "webp");
 
-		$image = $_FILES['imageNews']['name'];
+		$image = $_FILES['imageOrder']['name'];
 		$ext = substr($image, -4);
 		$filename = substr($image, 0, -4);
 		$imgUpload = '';
 		if (in_array($ext, $array_ext_image)) {
-			$path = $def['imgUploadNewsRealPath'];
+			$path = $def['imgUploadOrderRealPath'];
 			//if (!file_exists($path.stringImage($image))) {
 			$width = 500;
 			$height = 333;
@@ -35,17 +35,17 @@
 				$extGet = '.'.$ext;
 			else
 				$extGet = $ext;
-			$imgUpload = resizeImage2($width, $height, stringImage($image), $path, $_FILES['imageNews']['tmp_name'], stringImage($filename).'-'.'news'.time().$extGet);
+			$imgUpload = resizeImage2($width, $height, stringImage($image), $path, $_FILES['imageOrder']['tmp_name'], stringImage($filename).'-'.'ordernews'.time().$extGet);
 			//}
 		}
-		$data['imageNews'] = $imgUpload;
+		$data['imageOrder'] = $imgUpload;
 
 		$imageShareFb = $_FILES['imageShareFb']['name'];
 		$extShareFb = substr($imageShareFb, -4);
 		$filenameShareFb = substr($imageShareFb, 0, -4);
 		$imgUploadShareFb = '';
 		if (in_array($extShareFb, $array_ext_image)) {
-			$path = $def['imgUploadNewsRealPath'];
+			$path = $def['imgUploadOrderRealPath'];
 			//if (!file_exists($path.stringImage($image))) {
 			$widthFb = 450;
 			$heightFb = 235;
@@ -53,7 +53,7 @@
 				$extGetFb = '.'.$extShareFb;
 			else
 				$extGetFb = $extShareFb;
-			$imgUploadShareFb = resizeImage2($widthFb, $heightFb, stringImage($imageShareFb), $path, $_FILES['imageShareFb']['tmp_name'], stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb);
+			$imgUploadShareFb = resizeImage2($widthFb, $heightFb, stringImage($imageShareFb), $path, $_FILES['imageShareFb']['tmp_name'], stringImage($filenameShareFb).'-'.'ordernewsShareFB'.time().$extGetFb);
 			//}
 		}
 		$data['imageShareFb'] = $imgUploadShareFb;
@@ -62,7 +62,7 @@
 			$data['tags'] = implode(",", $tags);
 		}
 		
-		$table = $prefixTable.$def['tableNews'];
+		$table = $prefixTable.$def['tableOrders'];
 		$result = $h->insertDataBy($data, $table, $user_id);
 		if ($result) {
 			echo '1;success';
