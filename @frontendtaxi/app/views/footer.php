@@ -91,7 +91,7 @@
         <div class="phonering-alo-ph-circle"></div>
         <div class="phonering-alo-ph-circle-fill"></div>
         <div class="phonering-alo-ph-img-circle">
-            <a class="pps-btn-img " title="Liên hệ" href="tel:19000370"> <img src="assets/images/v8TniL3.png" alt="Liên hệ" width="50" class="img-responsive"/> </a>
+            <a class="pps-btn-img " title="Liên hệ" href="tel:0987660067"> <img src="assets/images/phone-ring.png" alt="Liên hệ" width="50" class="img-responsive"/> </a>
         </div>
     </div>
 </div>

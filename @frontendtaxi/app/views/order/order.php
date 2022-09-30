@@ -2,7 +2,7 @@
   $tableCateOrder = $prefixTable.$def['tableCategoriesOrders'];
   $tableOrder = $prefixTable.$def['tableOrders'];
   if (!isset($mod[1]) || $mod[1] == '') {
-    $titleGroup = $lang['orderText'];
+    $titleGroup = $lang['orderTaxi'];
     $whereOrder = "o.deleted_at is null and o.active = 1";
     $checkCateOrder = $h->checkExist($tableCateOrder, "deleted_at is null and active = 1");
     if ($checkCateOrder)

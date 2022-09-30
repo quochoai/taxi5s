@@ -2,6 +2,7 @@
   $lang = [
     'homeText' => 'Trang chủ',
     'orderText' => 'Đặt xe',
+    'orderTaxi' => 'Đặt Taxi',
     'newsText' => 'Tin tức',
     'registerText' => 'Đăng ký',
     'aboutText' => 'Giới thiệu',
@@ -39,6 +40,4 @@
 
     'pageNotFound' => 'Trang không tồn tại',
     'temporaryNotData' => 'Tạm thời chưa có dữ liệu trên trang này',
-
-
   ];

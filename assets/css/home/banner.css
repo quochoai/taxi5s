@@ -328,25 +328,25 @@
     .order-car-mobile{
         display: block;
     }
-    .img-car-name{
-        /*left: 0;
+    /*.img-car-name{
+        left: 0;
         font-size: 11px !important;
-        bottom: -50px !important;*/
-    }
+        bottom: -50px !important;
+    }*/
     .img-car{
-        //height: 65px !important;
+        height: 65px !important;
     }
     .sort-car {
         width: 45% !important;
     }
-    .banner{
-        /*background: url(/upload/images/banner.jpg);*/
-    }
+    /*.banner{
+        background: url(/upload/images/banner.jpg);
+    }*/
     .div_slogan p{
         display: none;
     }
     #jssor_1 {
-        display: none;@
+        display: none;
     }
     #content-booking{
         margin-right: 0px;
@@ -368,9 +368,9 @@
         padding-left: 0px !important;
         padding-right: 0px;
     }
-    #send-order {
-        /* margin-top: 15px; */
-    }
+    /*#send-order {
+         margin-top: 15px; 
+    }*/
     .rw-date-time-picker {
         left: 0px;
         z-index: 999;
@@ -414,9 +414,9 @@
     position: absolute;
     left: -131px;
 }
-.img-car {
+/*.img-car {
     
-}
+}*/
 .name-car{
     color: #222;
     font-size: 18px;
@@ -457,9 +457,9 @@
     background: #f26000;
     opacity: 1;
 }
-.section-dat-xe .product-item{
+/*.section-dat-xe .product-item{
    
-}
+}*/
 .product-item{
     float: right;
     margin-bottom: 30px;
@@ -507,9 +507,9 @@
     color: #666; font-size: 12px; 
     font-family: 'Roboto', sans-serif;
 }
-.content-info2{
+/*.content-info2{
     
-}
+}*/
 .order-car{
     text-align: right;
 }
@@ -522,12 +522,12 @@
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
-.view-place-order h4:after{
-    /* position: absolute; content: ""; */
+/*.view-place-order h4:after{
+     position: absolute; content: ""; */
     /* width: 80px; height: 2px; */
     /* background-color: #00904c; */
-    /* bottom: 0; margin-left: -40px; left: 50%; */
-}
+    /* bottom: 0; margin-left: -40px; left: 50%; 
+}*/
 .mcalendar{
     color:#f8821f;
     font-size: 20px;
@@ -601,9 +601,9 @@
         padding: 0;
         /* width: 87px; */
     }
-    .name-car {
+    /*.name-car {
        
-    }
+    }*/
     .content-car{
         padding: 0px;
     }
@@ -614,7 +614,7 @@
         font-size: 12px;
     }
     .price-car {
-       // font-size: 12px;
+       font-size: 12px;
     }
     .content-info{
         padding: 0px 5px;
@@ -653,9 +653,8 @@
 #popup-review .slide-review{
     margin: 15px 0px;
 }
-#popup-review .img-review{
-    /*max-height: 150px;*/
-}
+/*#popup-review .img-review{
+}*/
 #popup-review .modal-header .close {
     margin-top: -20px;
 }

@@ -11,8 +11,8 @@
       <div class="banner" >
         <div class="col-md-12 col-xs-12 div_slogan">
           <div class="slogan_taxigo">
-            <h1>Nền tảng dịch vụ vận tải thông minh hàng đầu Việt Nam</h1>
-            <h4 style="font-style: italic;margin-top: 0;">Hàng trăm ngàn khách hàng đã lựa chọn Taxi3s suốt 5 năm qua</h4>
+            <h3 style="margin-bottom: 7px;">Nền tảng đặt xe trực tuyến thông minh hàng đầu Việt Nam</h3>
+            <h1 style="color: #f69a38">"BIẾT TRƯỚC GIÁ THÀNH - LỘ TRÌNH DI CHUYỂN"</h1>            
           </div>
         </div>
         <div class="col-md-12 col-xs-12 div_datxe">
@@ -307,11 +307,10 @@
                           </span>
                         </div>
                     </div>
-                    -->
+                    
                     <div class="form-group col-md-12 edit-date" id="date_start_row">
 												<div class="row">
 													<div class="col-md-8 col-xs-8">
-														<!-- <label>Thời gian đón</label> -->
 														<div class="input-group gender_datetimeinput_here">
 															<div class="start_datetimeinput_here">
 																<span class="input-group-calendar start_calendar" data-date="08/09/2022"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Đi</span>
@@ -324,7 +323,7 @@
 																	<input size="16" name="date_start"  id="date_start"  type="hidden" value="08/09/2022 13:34"  class="form-control flatpickr-input flatpickr-input">
 																</div>
 
-																<!-- Modal -->
+																
 																<div class="modal fade datetimeModal" id="startTimeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 																	<div class="modal-dialog">
 																		<div class="modal-content">
@@ -358,7 +357,6 @@
                                             <div class="form-group edit-date" id="date_end_row">
 												<div class="row">
 													<div class="col-md-8 col-xs-8">
-														<!-- <label>Thời gian về</label> -->
 														<div class="input-group gender_datetimeinput_here">
 															<div class="end_datetimeinput_here">
 																<span class="input-group-calendar end_calendar" data-date="08/09/2022"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i> Đến</span>
@@ -402,10 +400,11 @@
 												</div>
 
                                             </div>
+                                            -->
                                             <div class="form-group" id="send">
                                                 
                                                     <a class="btn btn-primary" id="send-order">
-                                                        <span id="xem-gia">XEM GIÁ</span>
+                                                        <span id="xem-gia">ĐẶT XE</span>
                                                         <div class="sk-fading-circle" id="icon-xem-gia">
                                                             <div class="sk-circle1 sk-circle"></div>
                                                             <div class="sk-circle2 sk-circle"></div>
