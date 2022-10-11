@@ -22,6 +22,21 @@
       case $def['actionInfo']:
         $title = $lang['manageInformation'];
         break;
+      case $def['actionAdmin']:
+        $title = $lang['manageAdmin'];
+        break;
+      case $def['actionRole']:
+        $title = $lang['manageRole'];
+        break;
+      case $def['actionRoleFunction']:
+        $title = $lang['manageFunctionRoles'];
+        break;
+      case $def['actionHtml']:
+        $title = $lang['manageStaticInfo'];
+        break;
+      case $def['actionConfig']:
+        $title = $lang['manageConfig'];
+        break;
       default:
         $title = $lang['admin_title'];
         break;

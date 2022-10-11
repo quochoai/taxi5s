@@ -1,28 +1,30 @@
 <?php
   require_once "../../../../library.php";
-if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
+	if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
     if (isset($_SESSION['is_logined'])) {
-        $user = $_SESSION['is_logined'];
-        $user_id = $user['id'];
+			$user = $_SESSION['is_logined'];
+			$user_id = $user['id'];
     } else {
-        $islogin = explode("kiecook", $_COOKIE['islogined']);
-        $muser = explode("cookie", $islogin[0]);
-        $user_id = $muser[1];
+			$islogin = explode("kiecook", $_COOKIE['islogined']);
+			$muser = explode("cookie", $islogin[0]);
+			$user_id = $muser[1];
     }
-    $id = $_POST['idTag'];
+    $id = $_POST['idAdmin'];
     $data = $_POST['data'];
-    if (isset($_POST['active'])) {
-        $data['active'] = 1;
-    } else {
-        $data['active'] = 0;
-    }
+    if (isset($_POST['active']))
+      $data['active'] = 1;
+    else
+      $data['active'] = 0;
     
+		$pass = $_POST['password'];
+    if ($pass != '')
+			$data['password'] = $h->encodePQH($pass);
 
-		$table = $prefixTable.$def['tableTags'];
+		$table = $prefixTable.$def['tableAdmin'];
 		$result = $h->updateDataBy($data, $table, "where id = $id", $user_id);
 		if ($result)
-			echo '1;success';
+			_e('1;success');
 		else
-			echo '2;error';
+			_e('2;error');
 	} else
-		echo '5;error';
+		_e('5;error');

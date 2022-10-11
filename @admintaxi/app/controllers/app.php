@@ -40,6 +40,7 @@
 <head>
   <base href="<?php echo _urladmin; ?>" />
   <meta charset="utf-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?php _e(_url.'favicon-32x32.png') ?>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title><?php require_once $def['requireTitle'] ?></title>
   <link rel="canonical" href="<?php echo _urladmin; ?>"/>
@@ -210,6 +211,7 @@
     var showConfirmText = "<?php echo $lang['showConfirmText'] ?>";
     var hideConfirmText = "<?php echo $lang['hideConfirmText'] ?>";
     let linkChangePassword = "<?php echo $def['adminChangePassword'] ?>";
+    let linkChangeInfoSelf = "<?php _e($def['adminChangeInfoSelf']) ?>";
     var oldPasswordText = "<?php echo $lang['oldPassword'] ?>";
     var newPasswordText = "<?php echo $lang['newPassword'] ?>";
     var newPasswordConfirmText = "<?php echo $lang['newPasswordConfirm'] ?>";
@@ -236,6 +238,7 @@
   </div>
   <!-- ./wrapper -->
   <div class="modal fade" id="modal-change-password"></div>
+  <div class="modal fade" id="modal-change-infoSelf"></div>
   <div id="loading" class="d-none"><div></div></div> 
   <script type="text/javascript">
     function isNumber(n) {
@@ -261,6 +264,13 @@
         $.post(linkChangePassword, function(dataResponse){
           modalChangePassword.html(dataResponse);
           modalChangePassword.modal('show');
+        });
+      });
+      let modalChangeInfoSelf = $('#modal-change-infoSelf');
+      $(document).on('click', '.changeInfoSelf', function(){
+        $.post(linkChangeInfoSelf, function(dataResponse){
+          modalChangeInfoSelf.html(dataResponse);
+          modalChangeInfoSelf.modal('show');
         });
       });
     });

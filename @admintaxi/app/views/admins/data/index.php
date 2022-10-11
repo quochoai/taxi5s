@@ -20,7 +20,7 @@
 	} else {
 		$whh = "";
 		if ($search_value != '')
-			$whh .= " and titleTag like '%$search_value%'";
+			$whh .= " and (fullname like '%$search_value%' or username like '%$search_value%')";
 		$wh = "deleted_at is null".$whh;
 		if ($options['limit'] != '-1')
 			$lim = " limit ".$options['offset'].", ".$options['limit'];
@@ -28,34 +28,42 @@
 			$lim = "";
 	}
 	
-	$table = $prefixTable.$def['tableTags'];
+	$table = $prefixTable.$def['tableAdmin'];
+	$tableRole = $prefixTable.$def['tableAdminRoles'];
 	$s = $h->query("select * from $table where $wh order by created_at desc, id desc");
 	$no = 1;
 	$totalData = $h->num_rows($s);
 	if ($totalData > 0) {
 		$totalFiltered = $totalData;
 		$ss = $h->query("select * from $table where $wh order by created_at desc, id desc$lim");
-		while ($tag = $h->fetch_array($ss)) {
-			if ($tag['active'] == 1) {
-				$textActive = $lang['deactiveForm'].' '.$lang['tagText'].' '.$lang['this'];
+		while ($admin = $h->fetch_array($ss)) {
+			if ($admin['active'] == 1) {
+				$textActive = $lang['deactiveForm'].' '.$lang['adminText'].' '.$lang['this'];
 				$activeIcon = '<i class="fas fa-check-circle"></i>';
 				$classActive = ' text-success';
 				$act = 0;
 			} else {
-				$textActive = $lang['activeForm'].' '.$lang['tagText'].' '.$lang['this'];
+				$textActive = $lang['activeForm'].' '.$lang['adminText'].' '.$lang['this'];
 				$activeIcon = '<i class="far fa-circle"></i>';
 				$classActive = ' text-danger';
 				$act = 1;
 			}
-			$active = '<a class="text-center'.$classActive.' active cursorPointer" rel="'.$tag['id'].'" title="'.$textActive.'" data-active="'.$act.'"><h4>'.$activeIcon.'</h4></a>';
-			$titleTag = $tag['titleTag'];
+			$active = '<a class="text-center'.$classActive.' active cursorPointer" rel="'.$admin['id'].'" title="'.$textActive.'" data-active="'.$act.'"><h4>'.$activeIcon.'</h4></a>';
+			$fullname = $admin['fullname'];
+			$username = $admin['username'];
+			$getRole = $h->getById($tableRole, $admin['role']);
+			$role = $getRole['roleName'];
+			$phone = $admin['phone'];
 			
-			$actions = '<a class="btn btn-success btn-sm update cursorPointer" data-id="'.$tag['id'].'"  title="'.$lang['updateText'].' '.$lang['tagText'].' '.$lang['this'].'"><i class="fas fa-edit"></i></a> | <a class="btn btn-danger btn-sm delete cursorPointer" data-id="'.$tag['id'].'" title="'.$lang['deleteText'].' '.$lang['tagText'].' '.$lang['this'].'"><i class="fas fa-trash-alt"></i></a></a>';
+			$actions = '<a class="btn btn-success btn-sm update cursorPointer" data-id="'.$admin['id'].'"  title="'.$lang['updateText'].' '.$lang['adminText'].' '.$lang['this'].'"><i class="fas fa-edit"></i></a> | <a class="btn btn-danger btn-sm delete cursorPointer" data-id="'.$admin['id'].'" title="'.$lang['deleteText'].' '.$lang['adminText'].' '.$lang['this'].'"><i class="fas fa-trash-alt"></i></a>';
 			$a[] = array(
-				"DT_RowId" => $tag['id'],
+				"DT_RowId" => $admin['id'],
 				"DT_RowClass" => "choose_this",
 				"no" => $no,
-				"titleTag" => $titleTag,
+				"fullname" => $fullname,
+				'username' => $username,
+				'role' => $role,
+				'phone' => $phone,
 				"active" => $active, 
 				'actions' => $actions
 			);

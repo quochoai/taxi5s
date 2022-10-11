@@ -18,7 +18,7 @@
   date_default_timezone_set('Asia/Ho_Chi_Minh');
   $prefixTable = "taxi_";
   $lng = "";
-  $lngDefault = "";
+  $lngDefault = ""; // _vi
   $lngEn = "";
-  $lngDefaultText = "";
+  $lngDefaultText = ""; // (Vi)
   $lngEnText = "";

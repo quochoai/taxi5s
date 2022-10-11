@@ -11,6 +11,50 @@
         <ul class="nav nav-pills nav-sidebar flex-column <?php echo $def['nav-flat']; ?>" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <?php
+            if ($role == 1) {
+              $array_admin = [$def['actionAdmin'], $def['actionRole'], $def['actionRoleFunction']];
+          ?>
+          <li class="nav-item has-treeview<?php if (in_array($pqh[0], $array_admin)) echo ' menu-open'; ?>">
+            <a href="javascript:void(0);" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+              <p><?php echo $lang['manageAdmin'] ?><i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="?action=<?php echo $def['actionAdmin'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionAdmin']) echo ' active' ?>">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p><?php echo $lang['manageAdmin'] ?></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?action=<?php echo $def['actionRole'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionRole']) echo ' active' ?>">
+                  <i class="nav-icon fas fa-user-tag"></i>
+                  <p><?php echo $lang['manageRole'] ?></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?action=<?php echo $def['actionRoleFunction'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionRoleFunction']) echo ' active' ?>">
+                  <i class="nav-icon fas fa-user-cog"></i>
+                  
+                  <p><?php echo $lang['manageFunctionRole'] ?></p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionHtml']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionHtml'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionHtml']) echo ' active' ?>">
+              <i class="nav-icon fas fa-file-code"></i>
+              <p><?php echo $lang['manageHtml'] ?></p>
+            </a>
+          </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionConfig']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionConfig'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionConfig']) echo ' active' ?>">
+              <i class="nav-icon fas fa-user-cog"></i>
+              <p><?php echo $lang['manageConfig'] ?></p>
+            </a>
+          </li>
+          <?php } ?>
           <li class="nav-item<?php if ($pqh[0] == $def['actionCategoriesNews']) echo ' menu-open'; ?>">
             <a href="?action=<?php echo $def['actionCategoriesNews'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionCategoriesNews']) echo ' active' ?>">
               <i class="fas fa-newspaper nav-icon"></i>
@@ -47,22 +91,6 @@
               <p><?php echo $lang['manageInformation'] ?></p>
             </a>
           </li>
-          <!--
-          <li class="nav-item has-treeview<?php if (in_array($pqh[0], $array_openaccount)) echo ' menu-open'; ?>">
-            <a href="javascript:void(0);" class="nav-link">
-                <i class="nav-icon fas fa-university"></i>
-              <p><?php echo $lang['open_account_bank'] ?><i class="fas fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo $def['link_open_account_mb_bank'] ?>" class="nav-link<?php if ($pqh[0] == $def['link_open_account_mb_bank']) echo ' active' ?>">
-                  <i class="fas fa-university nav-icon"></i>
-                  <p><?php echo $lang['mb_bank'] ?></p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          -->
           <li class="nav-item has-treeview">
             <a href="<?php echo $def['link_logout'] ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

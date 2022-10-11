@@ -15,6 +15,10 @@
   define("_processTag", _process.'tags/');
   define("_processInfo", _process.'information/');
   define("_processAdmin", _process.'admins/');
+  define("_processRole", _process.'role/');
+  define("_processFunctionRole", _process.'frole/');
+  define("_processHtml", _process.'htmls/');
+  define("_processConfig", _process.'configuration/');
   define("_views", _app."views/");
   define("_viewsRequire", 'app/views/');
   define("_viewNews", _views.'news/');
@@ -32,6 +36,14 @@
   define("_viewInfo", _views.'information/');
   define("_viewRequireAdmin", _viewsRequire.'admins/');
   define("_viewAdmin", _views.'admins/');
+  define("_viewRequireHtml", _viewsRequire.'htmls/');
+  define("_viewHtml", _views.'htmls/');
+  define("_viewRequireConfiguration", _viewsRequire.'configuration/');
+  define("_viewConfiguration", _views.'configuration/');
+  define("_viewRequireRole", _viewsRequire.'role/');
+  define("_viewRole", _views.'role/');
+  define("_viewRequireFunctionRole", _viewsRequire.'frole/');
+  define("_viewFunctionRole", _views.'frole/');
   define("_viewController", 'app/controllers/');
   define('_imgUpload', _url.'imgUpload/');
   define('_ImgUploadRealPath', substr(_dir_root_, 0, -10)."imgUpload/");
@@ -51,6 +63,11 @@
     'actionTags' => 'tags',
     'actionInfo' => 'information',
     'actionChangePassword' => 'change-password',
+    'actionHtml' => 'htmls',
+    'actionConfig' => 'configurations',
+    'actionAdmin' => 'admin',
+    'actionRole' => 'role',
+    'actionRoleFunction' => 'function-role',
     // news category
     'listCateNews' => _viewRequireCateNews.'list.php',
     "listDataCateNews" => _viewRequireCateNews.'data/',
@@ -159,6 +176,89 @@
     // tag active
     "tagActiveProcess" => _processTag.'active/',
 
+    // admin list
+    "listAdmin" => _viewRequireAdmin.'list.php',
+    "listDataAdmin" => _viewAdmin.'data/',
+    "listDataAdminJs" => _viewAdmin.'data/data.js',
+    "listAdminDeleted" => _viewRequireAdmin.'listDeleted.php',
+    "listDataAdminDeleted" => _viewAdmin.'dataDeleted.php',
+    "listDataAdminDeletedJs" => _viewAdmin.'dataDeleted.js',
+    'imgUploadAdmin' => _imgUpload.'admins/',
+    'imgUploadAdminRealPath' => _ImgUploadRealPath.'admins/',
+    // admin add
+    "adminAdd" => _viewAdmin.'add/',
+    "adminAddProcess" => _processAdmin.'add/',
+    // admin update
+    "adminUpdate" => _viewAdmin.'update/',
+    'adminUpdateProcess' => _processAdmin.'update/',
+    'adminUpdateProcessSelf' => _processAdmin.'updateself/',
+    // admin delete
+    "adminDeleteProcess" => _processAdmin.'delete/',
+    // admin active
+    "adminActiveProcess" => _processAdmin.'active/',
+    // admin change password
+    "adminChangePassword" => _viewAdmin.'changePassword/',
+    'adminChangePasswordProcess' => _processAdmin.'changePassword/',
+    // admin change info self
+    'adminChangeInfoSelf' => _viewAdmin.'updateself/',
+    'adminUpdateProcessSelf' => _processAdmin.'updateself/',
+
+    // Role list
+    "listRole" => _viewRequireRole.'list.php',
+    "listDataRole" => _viewRole.'data/',
+    "listDataRoleJs" => _viewRole.'data/data.js',
+    "listRoleDeleted" => _viewRequireRole.'listDeleted.php',
+    "listDataRoleDeleted" => _viewRole.'dataDeleted.php',
+    "listDataRoleDeletedJs" => _viewRole.'dataDeleted.js',
+    // Role add
+    "roleAdd" => _viewRole.'add/',
+    "roleAddProcess" => _processRole.'add/',
+    // Role update
+    "roleUpdate" => _viewRole.'update/',
+    'roleUpdateProcess' => _processRole.'update/',
+    // Role delete
+    "roleDeleteProcess" => _processRole.'delete/',
+
+    // Role function list
+    "listFunctionRole" => _viewRequireFunctionRole.'list.php',
+    "listDataFunctionRole" => _viewFunctionRole.'data/',
+    "listDataFunctionRoleJs" => _viewFunctionRole.'data/data.js',
+    "listFunctionRoleDeleted" => _viewRequireFunctionRole.'listDeleted.php',
+    "listDataFunctionRoleDeleted" => _viewFunctionRole.'dataDeleted.php',
+    "listDataFunctionRoleDeletedJs" => _viewFunctionRole.'dataDeleted.js',
+    // Role function add
+    "functionRoleAdd" => _viewFunctionRole.'add/',
+    "functionRoleAddProcess" => _processFunctionRole.'add/',
+    // Role function update
+    "functionRoleUpdate" => _viewFunctionRole.'update/',
+    'functionRoleUpdateProcess' => _processFunctionRole.'update/',
+    // Role function delete
+    "functionRoleDeleteProcess" => _processFunctionRole.'delete/',
+
+    // Html list
+    "listHtml" => _viewRequireHtml.'list.php',
+    'listDataHtml' => _viewHtml.'data/',
+    'listDataHtmlJs' => _viewHtml.'data/data.js',
+    'imgUploadHtml' => _imgUpload.'htmls/',
+    'imgUploadHtmlRealPath' => _ImgUploadRealPath.'htmls/',
+    // Html add
+    "htmlAdd" => _viewHtml.'add/',
+    "htmlAddProcess" => _processHtml.'add/',
+    // Html update
+    "htmlUpdate" => _viewHtml.'update/',
+    'htmlUpdateProcess' => _processHtml.'update/',
+
+    // Config list
+    "listConfig" => _viewRequireConfiguration.'list.php',
+    'listDataConfig' => _viewConfiguration.'data/',
+    'listDataConfigJs' => _viewConfiguration.'data/data.js',
+    // Config add
+    "configAdd" => _viewConfiguration.'add/',
+    "configAddProcess" => _processConfig.'add/',
+    // Config update
+    "configUpdate" => _viewConfiguration.'update/',
+    'configUpdateProcess' => _processConfig.'update/',
+
     // information list
     "listInfo" => _viewRequireInfo.'list.php',
     "listDataInfo" => _viewInfo.'data/',
@@ -172,26 +272,8 @@
     // information active
     "infoActiveProcess" => _processInfo.'active/',
 
-    // admin list
-    "listAdmins" => _viewRequireAdmin.'list.php',
-    "listDataAdmins" => _viewAdmin.'data/',
-    "listDataAdminsJs" => _viewAdmin.'data/data.js',
-    "listAdminsDeleted" => _viewRequireAdmin.'listDeleted.php',
-    "listDataAdminsDeleted" => _viewAdmin.'dataDeleted.php',
-    "listDataAdminsDeletedJs" => _viewAdmin.'dataDeleted.js',
-    // admin add
-    "adminAdd" => _viewAdmin.'add/',
-    "adminAddProcess" => _processAdmin.'add/',
-    // admin update
-    "adminUpdate" => _viewAdmin.'update/',
-    'adminUpdateProcess' => _processAdmin.'update/',
-    // admin delete
-    "adminDeleteProcess" => _processAdmin.'delete/',
-    // tag active
-    "adminActiveProcess" => _processAdmin.'active/',
-    // admin change password
-    "adminChangePassword" => _viewAdmin.'changePassword/',
-    'adminChangePasswordProcess' => _processAdmin.'changePassword/',
+    
+    
 
     // theme
     "themeDist" => _theme.'dist/',

@@ -10,16 +10,14 @@
 			$user_id = $muser[1];
 		}
 		$data = $_POST['data'];
-		if (isset($_POST['active']))
-			$data['active'] = 1;
-		else
-			$data['active'] = 0;
+		$data['password'] = $h->encodePQH($_POST['password']);
+		$data['active'] = 1;
 		
-		$table = $prefixTable.$def['tableTags'];
+		$table = $prefixTable.$def['tableAdmin'];
 		$result = $h->insertDataBy($data, $table, $user_id);
 		if ($result)
-			echo '1;success';
+			_e('1;success');
 		else
-			echo '2;error';
+			_e('2;error');
 	} else
-		echo '5;error';
+		_e('5;error');

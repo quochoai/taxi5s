@@ -11,7 +11,7 @@
 		}
     $id = $_POST['id'];
     $data['active'] = $_POST['active'];
-    $table = $prefixTable.$def['tableTags'];
+    $table = $prefixTable.$def['tableAdmin'];
     $result = $h->updateDataBy($data, $table, " where id = $id", $user_id);
   } else
     echo '5;error';

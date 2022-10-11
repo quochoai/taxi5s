@@ -28,12 +28,12 @@
 <head>
   <base href="<?php _e(_url) ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title><?php require_once "@frontendtaxi/app/module/title.php" ?></title>
+  <title><?php require "@frontendtaxi/app/module/title.php" ?></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta charset="UTF-8">
   <meta name="keywords" content="<?php require_once "@frontendtaxi/app/module/keyw.php" ?>" />
   <meta name="author" content="Taxi3s" />
-  <meta name="description" content="<?php require_once "@frontendtaxi/app/module/desc.php" ?>" />
+  <meta name="description" content="<?php require "@frontendtaxi/app/module/desc.php" ?>" />
   <meta name="HandheldFriendly" content="true"/>
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="YES" />
@@ -41,12 +41,12 @@
   <link href="assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
   <meta property="og:locale" content="vi_VN" />
   <meta property="og:type" content="<?php _e($type_website) ?>" />
-  <meta property="og:title" content="<?php require_once "@frontendtaxi/app/module/title.php" ?>" />
-  <meta property="og:description" content="<?php require_once "@frontendtaxi/app/module/desc.php" ?>" />
+  <meta property="og:title" content="<?php require "@frontendtaxi/app/module/title.php" ?>" />
+  <meta property="og:description" content="<?php require "@frontendtaxi/app/module/desc.php" ?>" />
   <meta property="og:image" content="<?php require_once "@frontendtaxi/app/module/image.php" ?>" />
   <meta property="og:url" content="<?php _e("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) ?>" />
-  <meta name="twitter:title" content="<?php require_once "@frontendtaxi/app/module/title.php" ?>" />
-  <meta name="twitter:description" content="<?php require_once "@frontendtaxi/app/module/desc.php" ?>" />
+  <meta name="twitter:title" content="<?php require "@frontendtaxi/app/module/title.php" ?>" />
+  <meta name="twitter:description" content="<?php require "@frontendtaxi/app/module/desc.php" ?>" />
   <meta name="twitter:url" content="<?php _e("http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) ?>" />
   <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">

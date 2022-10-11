@@ -22,6 +22,21 @@
       case $def['actionInfo']:
         require_once $def['listInfo'];
         break;
+      case $def['actionAdmin']:
+        require_once $def['listAdmin'];
+        break;
+      case $def['actionRole']:
+        require_once $def['listRole'];
+        break;
+      case $def['actionRoleFunction']:
+        require_once $def['listFunctionRole'];
+        break;
+      case $def['actionHtml']:
+        require_once $def['listHtml'];
+        break;
+      case $def['actionConfig']:
+        require_once $def['listConfig'];
+        break;
       default:
         require_once $def['dashboard'];
         break;

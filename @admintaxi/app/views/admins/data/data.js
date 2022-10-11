@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 			search_value = null;
 		}
 		$(table_id).DataTable({
-			"aoColumnDefs": [ {"bSortable" : false, "bAutoWidth": true, "aTargets" : [2,3] } ],
+			"aoColumnDefs": [ {"bSortable" : false, "bAutoWidth": true, "aTargets" : [5, 6] } ],
 			"paging": true,
 			"lengthChange": true,
 			"ordering": false,
@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
 			processing: true,
 			serverSide: true,
 			ajax: {
-				"url": backend_tags_list,
+				"url": backend_admins_list,
 				"dataType": "json",
 				"type": "GET",
 				"data":{search_value: search_value}
@@ -44,7 +44,10 @@ jQuery(document).ready(function($) {
 			},
 			columns: [
 				{ data: 'no', name: 'no',className: "text-center text-nowrap small_text" },
-				{ data: 'titleTag', name: 'titleTag', className: "text-left text-nowrap small_text" },
+				{ data: 'fullname', name: 'fullname', className: "text-left text-nowrap small_text" },
+				{ data: 'username', name: 'username', className: "text-center text-nowrap small_text" },
+				{ data: 'role', name: 'role', className: "text-center text-nowrap small_text" },
+				{ data: 'phone', name: 'phone', className: "text-center text-nowrap small_text" },
 				{ data: 'active', name: 'active', className: "text-center text-nowrap small_text" },
 				{ data: 'actions', name: 'actions', className: "text-center text-nowrap" }
 			]
@@ -72,7 +75,7 @@ jQuery(document).ready(function($) {
 		fill_datatable('');
   });
 	let multi_id = [];
-	$('#tags tbody').on('click', 'tr', function() {
+	$('#admins tbody').on('click', 'tr', function() {
 		let id = this.id;
 		let index = $.inArray(id, multi_id);
 		if (index === -1)
@@ -89,9 +92,9 @@ jQuery(document).ready(function($) {
 		else {
 			let conf = "";
 			if (multi_id.length == 1)
-				conf = deleteConfirmText + tagText + ' ' + thisText + ' ?';
+				conf = deleteConfirmText + adminText + ' ' + thisText + ' ?';
 			else
-				conf = deleteMultiConfirmText + tagText + ' ' + thisText + ' ?';
+				conf = deleteMultiConfirmText + adminText + ' ' + thisText + ' ?';
 			if (confirm(conf)) {
 				let search_value = $.trim($('#search_value').val());
 				$('#delete_multi').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
@@ -105,7 +108,7 @@ jQuery(document).ready(function($) {
 	});
 	$(document).on('click', '.delete', function() {
 		let id = $(this).attr('data-id');
-		let conf = deleteConfirmText + tagText + ' ' + thisText + ' ?';
+		let conf = deleteConfirmText + adminText + ' ' + thisText + ' ?';
 		if (confirm(conf)) {
 			let search_value = $.trim($('#search_value').val());
 			$(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
@@ -135,25 +138,67 @@ jQuery(document).ready(function($) {
       modalAdd.modal('show');
     });    
   });
-	let addTag = '#addTag';
-	let btnAddTag = $(addTag);
-	$(document).on('click', addTag, function() {
-		let titleTagElement = $('#titleTag'+lngDefault);		
-		let titleTag = $.trim(titleTagElement.val());
-		if (titleTag == '') {
-			toastr.error(notFill + 'tên ' + tagText);
-			titleTagElement.addClass('is-invalid');
-			titleTagElement.focus();
+	let addAdmin = '#addAdmin';
+	let btnAddAdmin = $(addAdmin);
+	$(document).on('click', addAdmin, function() {
+		let fullnameElement = $('#fullname');		
+		let usernameElement = $('#username');
+		let passwordElement = $('#password');
+		let confirmPasswordElement = $('#confirmPassword');
+		let fullname = $.trim(fullnameElement.val());
+		let username = $.trim(usernameElement.val());
+		let password = $.trim(passwordElement.val());
+		let confirmPassword = $.trim(confirmPasswordElement.val());
+		if (fullname == '') {
+			toastr.error(notFill + fullnameText);
+			fullnameElement.addClass('is-invalid');
+			fullnameElement.focus();
 			return false;
 		} else {
-			titleTagElement.removeClass('is-invalid');
-			titleTagElement.addClass('is-valid');
+			fullnameElement.removeClass('is-invalid');
+			fullnameElement.addClass('is-valid');
+		}
+		if (username == '') {
+			toastr.error(notFill + usernameText);
+			usernameElement.addClass('is-invalid');
+			usernameElement.focus();
+			return false;
+		} else {
+			usernameElement.removeClass('is-invalid');
+			usernameElement.addClass('is-valid');
+		}
+		if (password == '') {
+			toastr.error(notFill + passwordText);
+			passwordElement.addClass('is-invalid');
+			passwordElement.focus();
+			return false;
+		} else {
+			passwordElement.removeClass('is-invalid');
+			passwordElement.addClass('is-valid');
+		}
+		if (confirmPassword == '') {
+			toastr.error(notFill + confirmPasswordText);
+			confirmPasswordElement.addClass('is-invalid');
+			confirmPasswordElement.focus();
+			return false;
+		} else {
+			confirmPasswordElement.removeClass('is-invalid');
+			confirmPasswordElement.addClass('is-valid');
+		}
+		if (confirmPassword != password) {
+			toastr.error(notMatchPassword);
+			confirmPasswordElement.addClass('is-invalid');
+			confirmPasswordElement.focus();
+			return false;
+		} else {
+			confirmPasswordElement.removeClass('is-invalid');
+			confirmPasswordElement.addClass('is-valid');
 		}
 		let formAdd = $('#form_add');
 		formAdd.ajaxForm({
 			beforeSend: function() {
-				btnAddTag.attr("disabled",true);
-				btnAddTag.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnAddAdmin.attr("disabled",true);
+				btnAddAdmin.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -162,8 +207,8 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-			 	btnAddTag.html(saveText + ' <i class="fas fa-save">');
-				btnAddTag.removeAttr('disabled');
+				btnAddAdmin.html(saveText + ' <i class="fas fa-save">');
+				btnAddAdmin.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){
@@ -196,25 +241,49 @@ jQuery(document).ready(function($) {
       modalUpdate.modal('show');
     });    
   });
-	let updateTag = '#updateTag';
-	let btnUpdateTag = $(updateTag);
-	$(document).on('click', updateTag, function() {
-		let titleTagElement_e = $('#titleTag'+lngDefault+'_e');		
-		let titleTag_e = $.trim(titleTagElement_e.val());
-		if (titleTag_e == '') {
-			toastr.error(notFill + 'tên ' + tagText);
-			titleTagElement_e.addClass('is-invalid');
-			titleTagElement_e.focus();
+	let updateAdmin = '#updateAdmin';
+	let btnUpdateAdmin = $(updateAdmin);
+	$(document).on('click', updateAdmin, function() {
+		let fullnameElement = $('#fullname_e');		
+		let usernameElement = $('#username_e');
+		let passwordElement = $('#password_e');
+		let confirmPasswordElement = $('#confirmPassword_e');
+		let fullname = $.trim(fullnameElement.val());
+		let username = $.trim(usernameElement.val());
+		let password = $.trim(passwordElement.val());
+		let confirmPassword = $.trim(confirmPasswordElement.val());
+		if (fullname == '') {
+			toastr.error(notFill + fullnameText);
+			fullnameElement.addClass('is-invalid');
+			fullnameElement.focus();
 			return false;
 		} else {
-			titleTagElement_e.removeClass('is-invalid');
-			titleTagElement_e.addClass('is-valid');
+			fullnameElement.removeClass('is-invalid');
+			fullnameElement.addClass('is-valid');
+		}
+		if (username == '') {
+			toastr.error(notFill + usernameText);
+			usernameElement.addClass('is-invalid');
+			usernameElement.focus();
+			return false;
+		} else {
+			usernameElement.removeClass('is-invalid');
+			usernameElement.addClass('is-valid');
+		}
+		if (confirmPassword != password) {
+			toastr.error(notMatchPassword);
+			confirmPasswordElement.addClass('is-invalid');
+			confirmPasswordElement.focus();
+			return false;
+		} else {
+			confirmPasswordElement.removeClass('is-invalid');
+			confirmPasswordElement.addClass('is-valid');
 		}
 		let formUpdate = $('#form_update');
 		formUpdate.ajaxForm({
 			beforeSend: function() {
-				btnUpdateTag.attr("disabled",true);
-				btnUpdateTag.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
+				btnUpdateAdmin.attr("disabled",true);
+				btnUpdateAdmin.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + processing); 
 			},
 			uploadProgress: function(event, position, total, percentComplete) {
 													
@@ -223,8 +292,8 @@ jQuery(document).ready(function($) {
 					
 			},
 			complete: function(xhr) {
-				btnUpdateTag.html(updateText + ' <i class="fas fa-edit">');
-				btnUpdateTag.removeAttr('disabled');
+				btnUpdateAdmin.html(updateText + ' <i class="fas fa-edit">');
+				btnUpdateAdmin.removeAttr('disabled');
 				var text = xhr.responseText;
 				var n = text.split(";");
 				if(n[0] == '1'){
@@ -247,6 +316,5 @@ jQuery(document).ready(function($) {
  			}
 		});
 	});
-
 });
 
